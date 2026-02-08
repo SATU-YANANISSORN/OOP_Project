@@ -1,0 +1,56 @@
+import java.awt.*;
+import javax.swing.*;
+
+public class MainPanel extends JPanel {
+
+    private CardLayout layout = new CardLayout();
+    private boolean paused = false;
+
+    private Timer gameLoop;
+
+    public MainPanel() {
+        setLayout(layout);
+        setPreferredSize(new Dimension(800, 600));
+
+        add(new TitlePanel(this), "TITLE");
+        add(new FightPanel(this), "GAME");
+        add(new PausePanel(this), "PAUSE");
+        add(new SettingsPanel(this), "SETTINGS");
+
+
+        gameLoop = new Timer(16,e -> update());
+        gameLoop.start();
+
+        layout.show(this, "TITLE");
+    }
+
+    private void update(){
+        //if(paused) return;
+
+        Component c = getCurScene();
+        if(c instanceof Updateable u){
+            u.update();
+        }
+    }
+
+    private Component getCurScene(){
+        for(Component c : getComponents()){
+            if(c.isVisible()) return c;
+        }
+        return null;
+    }
+
+    public void showScene(String name) {
+        layout.show(this, name);
+    }   
+
+    public void pauseGame(){
+        paused = true;
+        layout.show(this,"PAUSE");
+    } 
+
+    public void resumeGame(){
+        paused = false;
+        layout.show(this, "GAME");
+    }
+}
