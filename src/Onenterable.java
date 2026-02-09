@@ -1,3 +1,3 @@
 public interface Onenterable{
-    void onEnterable();
+    void onEnter(MainPanel main);
 }

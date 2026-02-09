@@ -10,6 +10,7 @@ public class MainPanel extends JPanel {
 
     public MainPanel() {
 
+
         setLayout(layout);
         setPreferredSize(new Dimension(800, 600));
 
@@ -44,6 +45,10 @@ public class MainPanel extends JPanel {
 
     public void showScene(String name) {
         layout.show(this, name);
+        Component c = getCurScene();
+        if(c instanceof Onenterable u){
+            u.onEnter(this);
+        }
     }   
 
     public void pauseGame(){
@@ -55,5 +60,6 @@ public class MainPanel extends JPanel {
         paused = false;
         layout.show(this, "GAME");
     }
+
 
 }
