@@ -7,7 +7,7 @@ public class RandomWord{
     
     public RandomWord(){
         try (BufferedReader br = new BufferedReader(new FileReader("word.txt"))){
-            String line = new String();
+            String line;
             while ((line = br.readLine()) != null){
                 words.add(line.trim());
             }

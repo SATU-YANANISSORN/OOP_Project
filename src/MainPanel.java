@@ -9,6 +9,7 @@ public class MainPanel extends JPanel {
     private Timer gameLoop;
 
     public MainPanel() {
+
         setLayout(layout);
         setPreferredSize(new Dimension(800, 600));
 
@@ -26,6 +27,7 @@ public class MainPanel extends JPanel {
 
     private void update(){
         //if(paused) return;
+
 
         Component c = getCurScene();
         if(c instanceof Updateable u){
@@ -53,4 +55,5 @@ public class MainPanel extends JPanel {
         paused = false;
         layout.show(this, "GAME");
     }
+
 }
