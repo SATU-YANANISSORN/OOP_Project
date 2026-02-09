@@ -1,14 +1,14 @@
 public abstract class Entity{
     protected int curHp;
     protected int maxHp;
-    protected int atk;
+    protected int baseAtk;
     protected int def;
     protected String name;
 
-    public Entity(int maxHp,int atk,int def,String name){
+    public Entity(int maxHp,int baseAtk,int def,String name){
         this.maxHp = maxHp;
         this.curHp = maxHp;
-        this.atk = atk;
+        this.baseAtk = baseAtk;
         this.def = def;
         this.name = name;
     }
@@ -25,12 +25,12 @@ public abstract class Entity{
         this.maxHp = maxHp;
     }
 
-    public int getAtk(){
-        return atk;
+    public int getBaseAtk(){
+        return baseAtk;
     }
 
-    public void setAtk(int atk){
-        this.atk = atk;
+    public void setBaseAtk(int baseAtk){
+        this.baseAtk = baseAtk;
     }
 
     public int getDef(){
