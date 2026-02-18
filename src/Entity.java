@@ -25,6 +25,13 @@ public abstract class Entity{
         this.maxHp = maxHp;
     }
 
+    public int getCurHp(){
+        return curHp;
+    }
+
+    public void setCurHp(int curHp){
+        this.curHp = curHp;
+    }
     public int getBaseAtk(){
         return baseAtk;
     }

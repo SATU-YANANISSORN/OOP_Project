@@ -47,10 +47,10 @@ public class Player extends Entity {
         return currentCombo;
     }
 
-    public void castSkill(Skill skill, Entity target) {
-        System.out.println(">>> " + this.name + " กำลังร่ายสกิล: " + skill.getName());
-        skill.use(this, target);
-    }
+    // public void castSkill(Skill skill, Entity target) {
+    //     System.out.println(">>> " + this.name + " กำลังร่ายสกิล: " + skill.getName());
+    //     skill.use(this, target);
+    // }
     
     // เพิ่ม method heal ตามที่แนะนำในข้อ 2.2 (ใส่ใน Entity หรือใส่ Override ที่นี่ก็ได้)
     public void heal(int amount) {
