@@ -1,9 +1,14 @@
 public class Player extends Entity {
 
+<<<<<<< HEAD
     private boolean isdodge = false;
 
     public Player(int maxHp, int baseAtk, int def, String name) {
         super(maxHp, baseAtk, def, name);
+=======
+    public Player(int maxHp, int baseAtk,String name,int Maxmp) {
+        super(maxHp,baseAtk,name,Maxmp);
+>>>>>>> 18bd4e7ee6eab9ac25b5b7118eba8f970233b961
     }
 
 
@@ -35,6 +40,7 @@ public class Player extends Entity {
         curHp = Math.min(curHp + 10, maxHp );
     }
 
+<<<<<<< HEAD
     @Override
     public  void takeDamage(int damage){
         if(!isdodge){
@@ -50,6 +56,8 @@ public class Player extends Entity {
         this.isdodge = false;
     }
 
+=======
+>>>>>>> 18bd4e7ee6eab9ac25b5b7118eba8f970233b961
 
 
 }
