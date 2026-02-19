@@ -11,7 +11,7 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
     private int combo = 0;
     private StageManager stageManager;
     private Enemy enemy;
-    private int stage = 0;
+    private int stage = 1;
 
     public FightPanel(MainPanel main) {
 
