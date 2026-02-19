@@ -2,19 +2,25 @@ public abstract class Entity{
     protected int curHp;
     protected int maxHp;
     protected int baseAtk;
-    protected int def;
     protected String name;
+    protected int maxMp;
+    protected int curMp;
+    protected boolean isDodge = false;
 
-    public Entity(int maxHp,int baseAtk,int def,String name){
+    public Entity(int maxHp,int baseAtk,String name,int maxMp){
         this.maxHp = maxHp;
         this.curHp = maxHp;
-        this.baseAtk = baseAtk;
-        this.def = def;
         this.name = name;
+        this.maxMp = maxMp;
+        this.curMp = maxMp;
     }
 
-    public void takeDamage(int damage){
+    public int takeDamage(int damage){
+        if(isDodge){
+            return 0;
+        }
         curHp = Math.max(0, curHp-damage);
+        return damage;
     }
 
     public int getMaxHp(){
@@ -29,9 +35,26 @@ public abstract class Entity{
         return curHp;
     }
 
-    public void setCurHp(int curHp){
-        this.curHp = curHp;
+    public int getMp(){
+        return curMp;
     }
+
+    public int getMaxMp(){
+        return maxMp;
+    }
+
+    public void addCurMp(int add){
+        curMp = Math.min(curMp + add,maxMp);
+    }
+
+    public void addCurHp(int add){
+        curHp = Math.min(curHp + add,maxHp);
+    }
+
+    public void decreseCurMp(int decrese){
+        curMp = Math.max(curMp - decrese, 0);
+    }
+
     public int getBaseAtk(){
         return baseAtk;
     }
@@ -40,17 +63,17 @@ public abstract class Entity{
         this.baseAtk = baseAtk;
     }
 
-    public int getDef(){
-        return def;
-    }
-
-    public void setDef(int def){
-        this.def = def;
-    }
-
     public String getName(){
         return name;
     }
 
-    public abstract void dealDamage(Entity Target);
+    public void setDodge(boolean isDodge){
+        this.isDodge = isDodge;
+    }
+
+    public boolean getIsDodge(){
+        return isDodge;
+    }
+
+    public abstract void dealDamage(Entity Target,int combo);
 }

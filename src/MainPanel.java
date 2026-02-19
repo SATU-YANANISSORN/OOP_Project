@@ -9,6 +9,7 @@ public class MainPanel extends JPanel {
     private Timer gameLoop;
 
     private int karma = 0;
+    private Player player;
 
     public MainPanel() {
 

@@ -1,22 +1,22 @@
 public class Monster extends Enemy{
 
-    public Monster(int maxHp,int baseAtk,int def,String name,float cdAttack){
-        super(maxHp, baseAtk, def, name, cdAttack);
-    }
-
-    public Monster(Monster ori){
-        super(ori);
+    public Monster(int maxHp,int baseAtk,String name,float cdAttack){
+        super(maxHp, baseAtk, name, cdAttack);
     }
 
     @Override
     public void dealDamage(Entity target,int damage) {
         target.takeDamage(baseAtk);
+        addCurMp(1);
     }
 
-    public void bossskill(Entity target,int combo){
+    public void attackSkill(Entity target,int combo){
         Skill Bs = (t,c,d) ->{
-            target.takeDamage(d);
+            if(curMp >= c){
+                target.takeDamage(d);
+                decreseCurMp(c);
+            }
         };
-        Bs.skill(target,0,5);
+        Bs.skill(target,1,5);
     }
 }
