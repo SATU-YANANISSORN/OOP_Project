@@ -23,8 +23,8 @@ public class UpgradePanel extends JPanel {
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.gridy = 0;
 
-        this.maxHpUpgradePanel = new UpgradeStatPanel(main, 10, 300, "maxHp");
-        this.baseAtkUpgradePanel = new UpgradeStatPanel(main, 300, 10, "baseAtk");
+        this.maxHpUpgradePanel = new UpgradeStatPanel(main, 10, 300, "maxHp",15);
+        this.baseAtkUpgradePanel = new UpgradeStatPanel(main, 300, 10, "damage",35);
 
         JLabel label = new JLabel("UPGRADES");
         label.setForeground(Color.WHITE);

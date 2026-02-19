@@ -16,11 +16,13 @@ public class UpgradeStatPanel extends JPanel{
     private String name;
     private Upgrade upgrade;
     private Player player;
+    private int amount;
 
-    public UpgradeStatPanel(MainPanel main,int right ,int left, String name) {
+    public UpgradeStatPanel(MainPanel main,int right ,int left, String name, int amount) {
         this.name = name;
         this.player = main.getPlayer();
         this.upgrade = new Upgrade(main.getKarma(), player);
+        this.amount = amount;
         // set layout
         setLayout(new GridBagLayout());
         setBackground(Color.BLACK);
@@ -47,10 +49,9 @@ public class UpgradeStatPanel extends JPanel{
         add(defGroup, gbc);
         gbc.gridy++;
         add(label,gbc);
-    }
 
-    public void setListener(){
-        this.upgradeDecrease.addActionListener(e -> this.upgrade.UpgradeStatus(name, ABORT, Increase).);
+        this.upgradeDecrease.addActionListener(e -> this.upgrade.UpgradeStatus(name, amount, false));
+        this.upgradeIncreased.addActionListener(e -> this.upgrade.UpgradeStatus(name, amount, true));
     }
     
 }

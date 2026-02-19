@@ -51,6 +51,10 @@ public abstract class Entity{
         curHp = Math.min(curHp + add,maxHp);
     }
 
+    public void setCurHp(int curHp){
+        this.curHp = curHp;
+    }
+
     public void decreseCurMp(int decrese){
         curMp = Math.max(curMp - decrese, 0);
     }
