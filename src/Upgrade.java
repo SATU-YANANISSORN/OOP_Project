@@ -16,11 +16,13 @@ public class Upgrade {
         current.put("def", player.getDef());
     }
 
+    public int getUse(){
+        return this.use;
+    }
     
     public void UpgradeStatus(String type , int amount){
-      if (this.points > 0){
+      if (this.use <= this.points){
         current.put(type, current.get(type) + amount);
-        this.points -= 1;
         this.use += 1;
       }
     }
@@ -30,10 +32,10 @@ public class Upgrade {
         player.setCurHp(current.get("MaxHp"));
         player.setBaseAtk(current.get("damage"));
         player.setDef(current.get("def"));
+        this.points -= this.use;
     }
 
     public void cancel(Player player){
-        this.points += this.use;
         getCurrentStatus(player);
     }
 }
