@@ -8,6 +8,8 @@ public class MainPanel extends JPanel {
 
     private Timer gameLoop;
 
+    private int karma = 0;
+
     public MainPanel() {
 
 
@@ -28,7 +30,6 @@ public class MainPanel extends JPanel {
 
     private void update(){
         //if(paused) return;
-
         Component c = getCurScene();
         if(c instanceof Updateable u){
             u.update();
@@ -58,6 +59,23 @@ public class MainPanel extends JPanel {
     public void resumeGame(){
         paused = false;
         layout.show(this, "GAME");
+    }
+
+    public int getKarma(){
+        return karma;
+    }
+
+    public boolean decreseKarma(int decrese){
+        if(decrese<=karma){
+            karma -= decrese;
+            return true;
+        }
+
+        return false;
+    }
+
+    public void addKarama(int add){
+        karma += add;
     }
 
 
