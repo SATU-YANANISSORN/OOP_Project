@@ -1,14 +1,14 @@
-public abstract class Enemy extends Entity{
+public abstract class Enemy extends Entity implements Cloneable{
     protected float  cdAttack;
     protected float  curCdAttack = 0;
 
-    public Enemy(int maxHp,int baseAtk,int def,String name,float cdAttack){
-        super(maxHp, baseAtk, def, name);
+    public Enemy(int maxHp,int baseAtk,String name,float cdAttack){
+        super(maxHp, baseAtk, name,10);
         this.cdAttack = cdAttack;
     }
 
     public Enemy(Enemy ori){
-        super(ori.maxHp, ori.baseAtk, ori.def, ori.name);
+        super(ori.maxHp, ori.baseAtk, ori.name,10);
         this.cdAttack = ori.cdAttack;
     }
 
@@ -22,6 +22,15 @@ public abstract class Enemy extends Entity{
 
     @Override
     public String toString(){
-        return name+"Spawned with [Hp:"+maxHp+",baseAtk:"+baseAtk+",def:"+def;
+        return name+"Spawned with [Hp:"+curHp+",baseAtk:"+baseAtk;
+    }
+
+    @Override
+    public Enemy clone(){
+        try {
+            return (Enemy) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 }
