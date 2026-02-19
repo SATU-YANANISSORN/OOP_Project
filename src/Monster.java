@@ -19,4 +19,6 @@ public class Monster extends Enemy{
         };
         Bs.skill(target,1,5);
     }
+
+    
 }

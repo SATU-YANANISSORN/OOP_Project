@@ -21,12 +21,12 @@ public class MainPanel extends JPanel {
         add(new FightPanel(this), "GAME");
         add(new PausePanel(this), "PAUSE");
         add(new SettingsPanel(this), "SETTINGS");
-
+        add(new UpgradePanel(this), "UPGRADES");
 
         gameLoop = new Timer(16,e -> update());
         gameLoop.start();
 
-        layout.show(this, "TITLE");
+        layout.show(this, "UPGRADES");
     }
 
     private void update(){
@@ -79,5 +79,10 @@ public class MainPanel extends JPanel {
         karma += add;
     }
 
+    public Player getPlayer(){
+        return player;
+    }    
+
 
 }
+
