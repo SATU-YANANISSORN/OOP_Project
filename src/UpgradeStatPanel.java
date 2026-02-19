@@ -50,7 +50,7 @@ public class UpgradeStatPanel extends JPanel{
     }
 
     public void setListener(){
-        this.upgradeDecrease.addActionListener(e -> this.upgrade.UpgradeStatus(name, ABORT, Increase).);
+        this.upgradeDecrease.addActionListener(e -> this.upgrade.UpgradeStatus(name, ABORT, Increase));
     }
     
 }
