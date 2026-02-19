@@ -79,5 +79,10 @@ public class MainPanel extends JPanel {
         karma += add;
     }
 
+    public Player getPlayer(){
+        return player;
+    }    
+
 
 }
+
