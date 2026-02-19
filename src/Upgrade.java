@@ -14,7 +14,6 @@ public class Upgrade {
     private void getCurrentStatus(Player player){
         current.put("damage" , player.getBaseAtk());
         current.put("MaxHp", player.getMaxHp());
-        current.put("def", player.getDef());
     }
 
     public int getUse(){
@@ -39,7 +38,6 @@ public class Upgrade {
         player.setMaxHp(current.get("MaxHp"));
         player.setCurHp(current.get("MaxHp"));
         player.setBaseAtk(current.get("damage"));
-        player.setDef(current.get("def"));
         this.points -= this.use;
     }
 

@@ -12,10 +12,15 @@ import javax.swing.JPanel;
 public class UpgradeStatPanel extends JPanel{
 
     private GridBagConstraints gbc;
-    private JButton upgradeDefIncreased, upgradeDefDecrease;
+    private JButton upgradeIncreased, upgradeDecrease;
     private String name;
+    private Upgrade upgrade;
+    private Player player;
 
     public UpgradeStatPanel(MainPanel main,int right ,int left, String name) {
+        this.name = name;
+        this.player = main.getPlayer();
+        this.upgrade = new Upgrade(main.getKarma(), player);
         // set layout
         setLayout(new GridBagLayout());
         setBackground(Color.BLACK);
@@ -33,16 +38,19 @@ public class UpgradeStatPanel extends JPanel{
         label.setForeground(Color.WHITE);
         label.setFont(new Font("Arial", Font.BOLD, 18));
     
-        upgradeDefIncreased = new JButton("+");
-        upgradeDefDecrease = new JButton("-");
+        upgradeIncreased = new JButton("+");
+        upgradeDecrease = new JButton("-");
         
-        defGroup.add(upgradeDefIncreased);
-        defGroup.add(upgradeDefDecrease);
+        defGroup.add(upgradeIncreased);
+        defGroup.add(upgradeDecrease);
         
         add(defGroup, gbc);
         gbc.gridy++;
         add(label,gbc);
     }
 
+    public void setListener(){
+        this.upgradeDecrease.addActionListener(e -> this.upgrade.UpgradeStatus(name, ABORT, Increase).);
+    }
     
 }
