@@ -52,6 +52,8 @@ public class Player extends Entity {
         this.isdodge = false;
     }
 
+    //ming
+
 
 
 }
