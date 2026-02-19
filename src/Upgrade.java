@@ -5,6 +5,7 @@ public class Upgrade {
     private int points;
     private int use = 0;
     private Map<String,Integer> current = new HashMap<>();
+ 
     public Upgrade(int points, Player player){
         this.points = points;
         getCurrentStatus(player);
@@ -20,11 +21,18 @@ public class Upgrade {
         return this.use;
     }
     
-    public void UpgradeStatus(String type , int amount){
-      if (this.use <= this.points){
-        current.put(type, current.get(type) + amount);
-        this.use += 1;
-      }
+    public void UpgradeStatus(String type , int amount , boolean Increase){
+        if(Increase){
+            if (this.use <= this.points){
+                current.put(type, current.get(type) + amount);
+                this.use += 1;
+            }
+        }else {
+            if (this.use >= 1) {
+                current.put(type, current.get(type) - amount);
+                this.use -= 1;
+            }
+        }
     }
 
     public void accept(Player player){
