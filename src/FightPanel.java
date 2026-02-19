@@ -3,17 +3,21 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
 
-public class FightPanel extends JPanel implements Updateable,Onenterable {
+public class FightPanel extends JPanel implements Updateable, Onenterable {
 
     private JTextField curWord;
     private RandomWord randomWord;
     private JLabel comboLb;
     private int combo = 0;
-
+    private StageManager stageManager;
+    private Enemy enemy;
+    private int stage = 0;
 
     public FightPanel(MainPanel main) {
 
         setLayout(new FlowLayout());
+
+        stageManager = new StageManager();
 
         randomWord = new RandomWord();
         curWord = new JTextField("default");
@@ -72,6 +76,7 @@ public class FightPanel extends JPanel implements Updateable,Onenterable {
             if (curW.length() == 0) {
                 randomNewWord();
                 addComboLb();
+                enemy.takeDamage(10);
             } else {
                 curWord.setText(curW);
             }
@@ -89,14 +94,37 @@ public class FightPanel extends JPanel implements Updateable,Onenterable {
         comboLb.setText("Combo: 0");
     }
 
+    boolean preparingAttack = false;
+    long prepareStart = 0;
+
     @Override
     public void update() {
+
+        long now = System.currentTimeMillis();
+
+        if(!preparingAttack){
+            enemy.curCdAttack += 16;
+            // System.out.println("curCd:"+curCdAttack);
+            if (enemy.curCdAttack >= enemy.cdAttack * 1000) {
+                // enemy.dealDamage(enemy);
+                System.out.println("prepare");
+                preparingAttack = true;
+                prepareStart = now;
+            }
+        }
+        else{
+            if(now - prepareStart >= 1000){
+                System.out.println("Attack");
+                enemy.curCdAttack = 0;
+                preparingAttack = false;
+            }
+        }
 
     }
 
     @Override
-    public void onEnter(MainPanel main){
-        
+    public void onEnter(MainPanel main) {
+        enemy = stageManager.selectEnemy(stage);
     }
 
     public int getCombo() {
