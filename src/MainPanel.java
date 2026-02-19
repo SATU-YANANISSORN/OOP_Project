@@ -29,7 +29,6 @@ public class MainPanel extends JPanel {
     private void update(){
         //if(paused) return;
 
-
         Component c = getCurScene();
         if(c instanceof Updateable u){
             u.update();
