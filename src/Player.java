@@ -1,9 +1,7 @@
 public class Player extends Entity {
 
-    private boolean isdodge = false;
-
-    public Player(int maxHp, int baseAtk, int def, String name) {
-        super(maxHp, baseAtk, def, name);
+    public Player(int maxHp, int baseAtk,String name,int Maxmp) {
+        super(maxHp,baseAtk,name,Maxmp);
     }
 
 
@@ -34,25 +32,6 @@ public class Player extends Entity {
     public void Heal(){
         curHp = Math.min(curHp + 10, maxHp );
     }
-
-    @Override
-    public boolean takeDamage(int damage){
-        if(!isdodge){
-            super.takeDamage(damage);
-            return true;
-        }
-        return false;
-    }
-
-    public void Dodge(){
-        this.isdodge = true;
-    }
-
-    public void resetdodge(){
-        this.isdodge = false;
-    }
-
-    //ming
 
 
 

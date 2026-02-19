@@ -16,6 +16,6 @@ public class Boss1 extends Enemy{
                 decreseCurMp(c);
             }
         };
-        Bs.skill(target,1,10);
+        Bs.skill(target,1,baseAtk);
     }
 }

@@ -15,4 +15,6 @@ public class Boss2 extends Enemy{
         };
         Bs.skill(target,0,baseAtk);
     }
+
+    
 }
