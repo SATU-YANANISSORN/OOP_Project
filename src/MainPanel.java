@@ -13,6 +13,7 @@ public class MainPanel extends JPanel {
 
     public MainPanel() {
 
+        //this.player = new Player(150, 50, "tester", 30);
 
         setLayout(layout);
         setPreferredSize(new Dimension(800, 600));
