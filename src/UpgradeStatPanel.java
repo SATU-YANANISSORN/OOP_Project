@@ -1,6 +1,5 @@
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -9,48 +8,83 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class UpgradeStatPanel extends JPanel{
+public class UpgradeStatPanel extends JPanel implements Updateable , panelCreate{
 
     private GridBagConstraints gbc;
     private JButton upgradeIncreased, upgradeDecrease;
+    private JLabel showStat,showKarma;
     private String name;
     private Upgrade upgrade;
-    private Player player;
+    private int amount;
+    
 
-    public UpgradeStatPanel(MainPanel main,int right ,int left, String name) {
+    public UpgradeStatPanel(String name, int amount, Upgrade upgrade , JLabel showKarma) {
         this.name = name;
-        this.player = main.getPlayer();
-        this.upgrade = new Upgrade(main.getKarma(), player);
-        // set layout
+        this.upgrade = upgrade;
+        this.amount = amount;
+        this.showKarma = showKarma;
         setLayout(new GridBagLayout());
         setBackground(Color.BLACK);
 
-        gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, left, 10, right);
+        JPanel panel = new JPanel(new GridBagLayout());
+        panel.setBackground(Color.WHITE);
+        this.gbc = new GridBagConstraints();
+        panel.setPreferredSize(new Dimension(200,400));
+        
+        //statPanel name
+        JLabel nameLabel = new JLabel(name);
+        nameLabel.setForeground(Color.BLACK);
+        gbc.gridx = 0;
         gbc.gridy = 0;
+        gbc.gridwidth = 3; // use 3 column
+        gbc.insets = new Insets(300, 0, 20, 0); // margin
+        panel.add(nameLabel, gbc);
 
-        // set panel
-        JPanel defGroup = new JPanel(new FlowLayout(FlowLayout.CENTER, 50, 0));
-        defGroup.setPreferredSize(new Dimension(300, 400));
-        defGroup.setBackground(Color.BLACK);
-        
+        // รีเซ็ต gridwidth กลับเป็น 1 สำหรับแถวถัดไป
+        gbc.gridwidth = 1;
+        gbc.gridy = 1; // แถวที่ 2 คือแถวที่มี ปุ่ม-เลข-ปุ่ม
+
+        // increasedbutton
+        upgradeIncreased = createButton("+");
+        gbc.gridx = 0; 
+        gbc.insets = new Insets(0, 0, 0, 10); // เว้นห่างจากตัวเลขทางขวา 10px
+        panel.add(upgradeIncreased, gbc);
+
+        // showStat
+        showStat = createLabel(Integer.toString(upgrade.getStatus(name)), 18);
+        gbc.gridx = 1;
+        gbc.insets = new Insets(0, 10, 0, 10); // เว้นห่างซ้ายและขวาอย่างละ 10px
+        panel.add(showStat, gbc);
+
+        // decreasebutton
+        upgradeDecrease = createButton("-");
+        gbc.gridx = 2;
+        gbc.insets = new Insets(0, 10, 0, 10); // เว้นห่างจากตัวเลขทางซ้าย 10px
+        panel.add(upgradeDecrease, gbc);
+        // panel
+        add(panel,gbc);
+        //respond
+        this.upgradeDecrease.addActionListener(e -> {this.upgrade.UpgradeStatus(name, amount, false);update();});
+        this.upgradeIncreased.addActionListener(e ->{this.upgrade.UpgradeStatus(name, amount, true);update();});
+
+    }
+    
+    @Override
+    public void update(){
+        showStat.setText(Integer.toString(upgrade.getStatus(this.name)));
+        this.showKarma.setText("Karma: " + upgrade.getDifUseAndPoints());
+    }
+    @Override
+    public JButton createButton(String name ){
+        JButton button = new JButton(name);
+        button.setPreferredSize(new Dimension(50 , 50));
+        return button;
+    }
+    @Override
+    public JLabel createLabel(String name,int size){
         JLabel label = new JLabel(name);
-        label.setForeground(Color.WHITE);
-        label.setFont(new Font("Arial", Font.BOLD, 18));
-    
-        upgradeIncreased = new JButton("+");
-        upgradeDecrease = new JButton("-");
-        
-        defGroup.add(upgradeIncreased);
-        defGroup.add(upgradeDecrease);
-        
-        add(defGroup, gbc);
-        gbc.gridy++;
-        add(label,gbc);
+        label.setForeground(Color.BLACK);
+        label.setFont(new Font("Arial", Font.BOLD, size));
+        return  label;
     }
-
-    public void setListener(){
-        this.upgradeDecrease.addActionListener(e -> this.upgrade.UpgradeStatus(name, ABORT, Increase));
-    }
-    
 }
