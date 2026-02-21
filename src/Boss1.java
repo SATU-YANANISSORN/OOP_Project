@@ -1,12 +1,10 @@
+
+import java.awt.image.BufferedImage;
+
 public class Boss1 extends Enemy{
 
-    public Boss1(int maxHp,int baseAtk,String name,float  cdAttack){
-        super(maxHp, baseAtk, name, cdAttack);
-    }
-
-    @Override
-    public void dealDamage(Entity target,int damage){
-        target.takeDamage(damage);
+    public Boss1(int maxHp,int baseAtk,String name,float cdAttack,BufferedImage enemyImage){
+        super(maxHp, baseAtk, name, cdAttack,enemyImage);
     }
 
     public void bossskill(Entity target,int combo){
@@ -16,6 +14,6 @@ public class Boss1 extends Enemy{
                 decreseCurMp(c);
             }
         };
-        Bs.skill(target,1,baseAtk);//vbvb
+        Bs.skill(target,1,baseAtk*2);
     }
 }
