@@ -12,9 +12,8 @@ public class MainPanel extends JPanel {
     private Player player;
 
     public MainPanel() {
-
-        //this.player = new Player(150, 50, "tester", 30);
-
+        //กำหนด player ก่อน upgrade ถึงจะทำงานได้ 
+        //player = new Player(150,35,"Dragon warrior I HERE PO",20);
         setLayout(layout);
         setPreferredSize(new Dimension(800, 600));
 
@@ -27,7 +26,7 @@ public class MainPanel extends JPanel {
         gameLoop = new Timer(16,e -> update());
         gameLoop.start();
 
-        layout.show(this, "UPGRADES");
+        layout.show(this, "TITLE");
     }
 
     private void update(){
