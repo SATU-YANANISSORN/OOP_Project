@@ -20,6 +20,7 @@ public class GameOverPanel extends JPanel implements Updateable, Onenterable {
                 if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
                     main.newPlayer();
                     main.showScene("TITLE");
+                    main.setStage(1);
                 }
             }
         });

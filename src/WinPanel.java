@@ -18,15 +18,12 @@ public class WinPanel extends JPanel implements Onenterable {
             public void keyPressed(java.awt.event.KeyEvent e) {
                 if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
                     int stage = main.getStage();
-                    System.out.println(stage);
-
+                    main.nextStage();
                     if (stage % 5 == 0) {
                         main.showScene("UPGRADE");
                     } else {
                         main.showScene("GAME");
                     }
-
-                    main.nextStage();
                 }
             }
         });

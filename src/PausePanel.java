@@ -57,7 +57,10 @@ public class PausePanel extends JPanel {
     private void execute() {
         if (selected == 0) {
             main.resumeGame();
-        } else {
+        } else if(selected == options.length - 1){
+            main.showScene("TITLE");
+            main.setStage(1);
+        }else{
             main.showScene(options[selected]);
         }
     }
