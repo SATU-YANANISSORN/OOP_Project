@@ -80,10 +80,6 @@ public abstract class Entity{
         return isDodge;
     }
 
-    public void setCurHp(int curHp){
-        this.curHp = curHp;
-    }
-
     @Override
     public String toString(){
         return name + ":CurHp="+curHp;
