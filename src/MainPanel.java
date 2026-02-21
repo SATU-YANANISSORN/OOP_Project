@@ -11,22 +11,35 @@ public class MainPanel extends JPanel {
     private int karma = 0;
     private Player player;
 
+    private int stage = 1;
+
+    private String prevScene;
+    private String curScene;
+
     public MainPanel() {
         //กำหนด player ก่อน upgrade ถึงจะทำงานได้ 
         //player = new Player(150,35,"Dragon warrior I HERE PO",20);
         setLayout(layout);
-        setPreferredSize(new Dimension(800, 600));
+        setPreferredSize(new Dimension(1280, 720));
 
         add(new TitlePanel(this), "TITLE");
         add(new FightPanel(this), "GAME");
         add(new PausePanel(this), "PAUSE");
         add(new SettingsPanel(this), "SETTINGS");
-        add(new UpgradePanel(this), "UPGRADES");
+        // add(new UpgradePanel(this), "UPGRADES");
+        add(new GameOverPanel(this), "GAMEOVER");
+        add(new WinPanel(this),"WIN");
 
         gameLoop = new Timer(16,e -> update());
         gameLoop.start();
 
-        layout.show(this, "TITLE");
+        showScene("TITLE");
+
+        newPlayer();
+    }
+
+    public void newPlayer(){
+        player = new Player(100,20,"Player",10);
     }
 
     private void update(){
@@ -45,12 +58,31 @@ public class MainPanel extends JPanel {
     }
 
     public void showScene(String name) {
+        prevScene = curScene;
+        curScene = name;
         layout.show(this, name);
         Component c = getCurScene();
         if(c instanceof Onenterable u){
             u.onEnter(this);
         }
-    }   
+    }
+
+    public void goBack() {
+        if(prevScene != null){
+            String tem = curScene;
+            curScene = prevScene;
+            prevScene = tem;
+            layout.show(this, curScene);
+        }
+    }
+
+    public void win(){
+        showScene("WIN");
+    }
+
+    public void gameOver(){
+        showScene("GAMEOVER");
+    }
 
     public void pauseGame(){
         paused = true;
@@ -82,6 +114,18 @@ public class MainPanel extends JPanel {
     public Player getPlayer(){
         return player;
     }    
+
+    public int getStage(){
+        return stage;
+    }
+
+    public void setStage(int stage){
+        this.stage = stage;
+    }
+
+    public void nextStage(){
+        stage++;
+    }
 
 
 }

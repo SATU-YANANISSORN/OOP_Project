@@ -1,10 +1,15 @@
+
+import java.awt.image.BufferedImage;
+
 public abstract class Enemy extends Entity implements Cloneable{
     protected float  cdAttack;
     protected float  curCdAttack = 0;
+    protected BufferedImage enemyImage;
 
-    public Enemy(int maxHp,int baseAtk,String name,float cdAttack){
+    public Enemy(int maxHp,int baseAtk,String name,float cdAttack,BufferedImage enemyImage){
         super(maxHp, baseAtk, name,10);
         this.cdAttack = cdAttack;
+        this.enemyImage = enemyImage;
     }
 
     public Enemy(Enemy ori){
@@ -20,9 +25,8 @@ public abstract class Enemy extends Entity implements Cloneable{
         this.cdAttack = cdAttack;
     }
 
-    @Override
-    public String toString(){
-        return name+"Spawned with [Hp:"+curHp+",baseAtk:"+baseAtk;
+    public BufferedImage getEnemyImage(){
+        return enemyImage;
     }
 
     @Override

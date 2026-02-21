@@ -2,7 +2,7 @@ public class SpecialBoss2 {  //เฟส แล้วเปลี่ยนร่
     private Combo combo;
     private int curcombo; //นับจำนวน combo
     private Player player;
-    private int fade = 1;
+    private int phase = 1;
     private Boss2 boss2;
 
     public SpecialBoss2(Combo combo,Player player,Boss2 boss2){
@@ -13,10 +13,12 @@ public class SpecialBoss2 {  //เฟส แล้วเปลี่ยนร่
 
     public void wave(){
         curcombo ++;
-        if(curcombo == 5*fade ){
-            if(combo.getValue() == 5*fade){
-                fade ++;
-            }else{boss2.dealDamage(player,boss2.getBaseAtk());}
+        if(curcombo == 5*phase ){
+            if(combo.getValue() == 5*phase){
+                phase ++;
+            }else{
+                boss2.dealDamage(player);
+            }
         curcombo = 0;
         combo.reset();
         }

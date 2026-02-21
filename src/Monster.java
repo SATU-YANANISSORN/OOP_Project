@@ -1,13 +1,10 @@
+
+import java.awt.image.BufferedImage;
+
 public class Monster extends Enemy{
 
-    public Monster(int maxHp,int baseAtk,String name,float cdAttack){
-        super(maxHp, baseAtk, name, cdAttack);
-    }
-
-    @Override
-    public void dealDamage(Entity target,int damage) {
-        target.takeDamage(baseAtk);
-        addCurMp(1);
+    public Monster(int maxHp,int baseAtk,String name,float cdAttack,BufferedImage enemyImage){
+        super(maxHp, baseAtk, name, cdAttack,enemyImage);
     }
 
     public void attackSkill(Entity target,int combo){

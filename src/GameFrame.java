@@ -11,7 +11,7 @@ public class GameFrame extends JFrame {
 
         mainPanel = new MainPanel();
         add(mainPanel);
-        setSize(1920,1080);
+        setSize(1280,720);
         setLocationRelativeTo(null);
         setVisible(true);
     }

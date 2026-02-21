@@ -10,6 +10,7 @@ public abstract class Entity{
     public Entity(int maxHp,int baseAtk,String name,int maxMp){
         this.maxHp = maxHp;
         this.curHp = maxHp;
+        this.baseAtk = baseAtk;
         this.name = name;
         this.maxMp = maxMp;
         this.curMp = maxMp;
@@ -35,7 +36,7 @@ public abstract class Entity{
         return curHp;
     }
 
-    public int getMp(){
+    public int getCurMp(){
         return curMp;
     }
 
@@ -79,5 +80,18 @@ public abstract class Entity{
         return isDodge;
     }
 
-    public abstract void dealDamage(Entity Target,int combo);
+    public void setCurHp(int curHp){
+        this.curHp = curHp;
+    }
+
+    @Override
+    public String toString(){
+        return name + ":CurHp="+curHp;
+    }
+
+    public void dealDamage(Entity target){
+        target.takeDamage(baseAtk);
+        addCurMp(1);
+        // System.out.println(target);
+    };
 }
