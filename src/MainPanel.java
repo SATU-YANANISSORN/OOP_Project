@@ -17,7 +17,8 @@ public class MainPanel extends JPanel {
     private String curScene;
 
     public MainPanel() {
-
+        //กำหนด player ก่อน upgrade ถึงจะทำงานได้ 
+        //player = new Player(150,35,"Dragon warrior I HERE PO",20);
         setLayout(layout);
         setPreferredSize(new Dimension(1280, 720));
 
