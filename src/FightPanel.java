@@ -134,6 +134,17 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
         long now = System.currentTimeMillis();
 
         if (!isGamewin) {
+            if (enemy.getCurHp() <= 0) {
+                curWord = " ";
+                curfadeTime += 16;
+                if (curfadeTime >= fadeTime * 1000) {
+                    isGamewin = true;
+                }
+            }
+            if (player.getCurHp() <= 0) {
+                main.gameOver();
+            }
+
             if (!preparingAttack) {
                 enemy.curCdAttack += 16;
                 if (enemy.curCdAttack >= enemy.cdAttack * 1000) {
@@ -151,16 +162,6 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
                 }
             }
 
-            if (enemy.getCurHp() <= 0) {
-                curWord = " ";
-                curfadeTime += 16;
-                if (curfadeTime >= fadeTime * 1000) {
-                    isGamewin = true;
-                }
-            }
-            if (player.getCurHp() <= 0) {
-                main.gameOver();
-            }
         } else {
             main.win();
             main.addKarama(enemy.getMaxHp());
@@ -261,6 +262,8 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
         randomNewWord();
         damageTexts.clear();
         shakeDuration = 0;
+
+        preparingAttack = false;
     }
 
     public Combo getCombo() {

@@ -45,7 +45,7 @@ public class Upgrade {
     
     public void UpgradeStatus(String type , int amount , boolean Increase){
         if(Increase){
-            if (this.use < this.points){
+            if (this.use + 10 <= this.points){
                 current.put(type, current.get(type) + amount);
                 this.use += 10;
             }
@@ -58,6 +58,7 @@ public class Upgrade {
     }
 
     public void accept(){
+        use = 0;
         this.player.setMaxHp(current.get("MaxHp"));
         this.player.setCurHp(current.get("MaxHp"));
         this.player.setBaseAtk(current.get("Damage"));
@@ -67,6 +68,8 @@ public class Upgrade {
     }
 
     public void cancel(){
+        use = 0;
         getCurrentStatus();
+        player.setCurHp(player.getMaxHp());
     }
 }
