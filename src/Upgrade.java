@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Upgrade {
-    private int points;
+    private  int points;
     private int use = 0;
     private Map<String,Integer> current = new HashMap<>();
     private Map<String,Integer> original = new HashMap<>();
@@ -10,14 +10,15 @@ public class Upgrade {
     private MainPanel main;
     private int cost = 5;
  
-    public Upgrade(int points, Player player , MainPanel main){
-        this.points = points;
-        this.player = player;
+    public Upgrade(MainPanel main , UpgradePanel upgradePanel){
+        this.points = main.getKarma();
+        this.player = main.getPlayer();
         this.main = main;
         getCurrentStatus();
     }
 
     public void getCurrentStatus(){
+        this.points = this.main.getKarma();
         current.put("Damage" , this.player.getBaseAtk());
         current.put("MaxHp", this.player.getMaxHp());
         original.put("Damage" , this.player.getBaseAtk());
@@ -67,8 +68,10 @@ public class Upgrade {
         this.player.setMaxHp(current.get("MaxHp"));
         this.player.setCurHp(current.get("MaxHp"));
         this.player.setBaseAtk(current.get("Damage"));
-        this.points = 0;
         main.decreseKarma(use);
+        this.points = 0;
+        this.use = 0;
+        System.out.println(main.getKarma() + " " + this.use + " " + getDifUseAndPoints());
         current.forEach((key, value) -> System.out.println("Key: " + key + ", Value: " + value));
     }
 
@@ -77,4 +80,6 @@ public class Upgrade {
         getCurrentStatus();
         player.setCurHp(player.getMaxHp());
     }
+
+
 }

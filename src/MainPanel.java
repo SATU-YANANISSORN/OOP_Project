@@ -17,6 +17,8 @@ public class MainPanel extends JPanel {
     private String curScene;
     private Combo combo;
 
+    private UpgradePanel upgradePanel;
+
     public MainPanel() {
 
         setLayout(layout);
@@ -82,6 +84,10 @@ public class MainPanel extends JPanel {
         karma += 1 + (stage/5);
     }
 
+    public UpgradePanel getUpgradePanel(){
+        return this.upgradePanel;
+    }
+
     public void gameOver(){
         resetData();
         showScene("GAMEOVER");
@@ -118,6 +124,12 @@ public class MainPanel extends JPanel {
         return false;
     }
 
+    
+    public void increasedKarma(int increase){
+        karma += increase;
+    }
+
+    
     public void addKarama(int add){
         karma += add;
     }

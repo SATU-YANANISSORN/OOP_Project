@@ -17,8 +17,10 @@ public class UpgradePanel extends JPanel implements panelCreate,Onenterable {
     private UpgradeStatPanel baseAtkUpgradePanel;
     private Upgrade upgrade;
     private JLabel showKarma;
+    private MainPanel main;
 
     public UpgradePanel(MainPanel main) {
+        this.main = main;
         setLayout(new GridBagLayout());
         setBackground(Color.BLACK);
 
@@ -81,5 +83,8 @@ public class UpgradePanel extends JPanel implements panelCreate,Onenterable {
         label.setForeground(Color.WHITE);
         label.setFont(new Font("Arial", Font.BOLD, size));
         return  label;
+    }
+    public Upgrade getUpgrade(){
+        return this.upgrade;
     }
 }
