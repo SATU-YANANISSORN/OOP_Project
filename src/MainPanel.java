@@ -15,12 +15,14 @@ public class MainPanel extends JPanel {
 
     private String prevScene;
     private String curScene;
+    private Combo combo;
 
     public MainPanel() {
 
         setLayout(layout);
         setPreferredSize(new Dimension(1280, 720));
         newPlayer();
+        combo = new Combo();
 
         add(new TitlePanel(this), "TITLE");
         add(new FightPanel(this), "GAME");
@@ -77,6 +79,7 @@ public class MainPanel extends JPanel {
 
     public void win(){
         showScene("WIN");
+        karma += 1 + (stage/5);
     }
 
     public void gameOver(){
@@ -88,7 +91,8 @@ public class MainPanel extends JPanel {
         karma = 0;
         stage = 1;
         newPlayer();
-        System.out.println(karma + ":" +player);
+        combo.reset();
+        // System.out.println(karma + ":" +player);
     }
 
     public void pauseGame(){
@@ -132,5 +136,9 @@ public class MainPanel extends JPanel {
 
     public void nextStage(){
         stage++;
+    }
+
+    public Combo getCombo(){
+        return combo;
     }
 }

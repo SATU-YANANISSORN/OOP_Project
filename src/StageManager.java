@@ -46,7 +46,7 @@ public class StageManager{
         }
         Enemy newEnemy = ori.clone();
         newEnemy.setBaseAtk(newEnemy.getBaseAtk() + 5*(stage/5));
-        newEnemy.setMaxHp(newEnemy.getMaxHp() + 5*(stage/5));
+        newEnemy.setMaxHp(newEnemy.getMaxHp() + 20*(stage/5));
         newEnemy.setCurHp(newEnemy.getMaxHp());
         System.out.println(newEnemy);
         return newEnemy;
