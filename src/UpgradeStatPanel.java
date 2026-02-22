@@ -8,7 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class UpgradeStatPanel extends JPanel implements Updateable , panelCreate{
+public class UpgradeStatPanel extends JPanel implements panelCreate{
 
     private GridBagConstraints gbc;
     private JButton upgradeIncreased, upgradeDecrease;
@@ -64,13 +64,12 @@ public class UpgradeStatPanel extends JPanel implements Updateable , panelCreate
         // panel
         add(panel,gbc);
         //respond
-        this.upgradeDecrease.addActionListener(e -> {this.upgrade.UpgradeStatus(name, amount, false);update();});
-        this.upgradeIncreased.addActionListener(e ->{this.upgrade.UpgradeStatus(name, amount, true);update();});
+        this.upgradeDecrease.addActionListener(e -> {this.upgrade.UpgradeStatus(name, amount, false);updateValue();});
+        this.upgradeIncreased.addActionListener(e ->{this.upgrade.UpgradeStatus(name, amount, true);updateValue();});
 
     }
     
-    @Override
-    public void update(){
+    public void updateValue(){
         showStat.setText(Integer.toString(upgrade.getStatus(this.name)));
         this.showKarma.setText("Karma: " + upgrade.getDifUseAndPoints());
     }

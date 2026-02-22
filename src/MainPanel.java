@@ -20,25 +20,25 @@ public class MainPanel extends JPanel {
 
         setLayout(layout);
         setPreferredSize(new Dimension(1280, 720));
+        newPlayer();
 
         add(new TitlePanel(this), "TITLE");
         add(new FightPanel(this), "GAME");
         add(new PausePanel(this), "PAUSE");
         add(new SettingsPanel(this), "SETTINGS");
-        // add(new UpgradePanel(this), "UPGRADES");
+        add(new UpgradePanel(this), "UPGRADES");
         add(new GameOverPanel(this), "GAMEOVER");
         add(new WinPanel(this),"WIN");
 
-        gameLoop = new Timer(16,e -> update());
+        gameLoop = new Timer(16,es -> update());
         gameLoop.start();
 
         showScene("TITLE");
 
-        newPlayer();
     }
 
     public void newPlayer(){
-        player = new Player(100,20,"Player",10);
+        player = new Player(10,99,"Player",10);
     }
 
     private void update(){
@@ -80,7 +80,15 @@ public class MainPanel extends JPanel {
     }
 
     public void gameOver(){
+        resetData();
         showScene("GAMEOVER");
+    }
+
+    public void resetData(){
+        karma = 0;
+        stage = 1;
+        newPlayer();
+        System.out.println(karma + ":" +player);
     }
 
     public void pauseGame(){
@@ -125,7 +133,4 @@ public class MainPanel extends JPanel {
     public void nextStage(){
         stage++;
     }
-
-
 }
-

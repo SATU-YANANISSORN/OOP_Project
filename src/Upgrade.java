@@ -16,7 +16,7 @@ public class Upgrade {
         getCurrentStatus();
     }
 
-    private void getCurrentStatus(){
+    public void getCurrentStatus(){
         current.put("Damage" , this.player.getBaseAtk());
         current.put("MaxHp", this.player.getMaxHp());
         original.put("Damage" , this.player.getBaseAtk());
@@ -25,6 +25,14 @@ public class Upgrade {
 
     public int getStatus(String type){
         return current.get(type);
+    }
+
+    public void setPoints(int points){
+        this.points = points;
+    }
+
+    public void setPlayer(Player player){
+        this.player = player;
     }
 
     public int getUse(){
@@ -39,12 +47,12 @@ public class Upgrade {
         if(Increase){
             if (this.use < this.points){
                 current.put(type, current.get(type) + amount);
-                this.use += 1;
+                this.use += 10;
             }
         }else {
-            if (this.use >= 1 && current.get(type) > original.get(type)) {
+            if (this.use >= 10 && current.get(type) > original.get(type)) {
                 current.put(type, current.get(type) - amount);
-                this.use -= 1;
+                this.use -= 10;
             }
         }
     }

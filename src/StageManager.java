@@ -27,11 +27,11 @@ public class StageManager{
         }
 
         monsterList = new ArrayList<>();
-        monsterList.add(new Monster(100,10,"Skeleton",5,enemies[0]));
-        monsterList.add(new Monster(125,15,"Tank",7,enemies[1]));
+        monsterList.add(new Monster(10,2,"Skeleton",5,enemies[0]));
+        monsterList.add(new Monster(15,4,"Tank",7,enemies[1]));
 
         bossList = new ArrayList<>();
-        bossList.add(new Boss1(200, 20, "Bigboss", 7,enemies[2]));
+        bossList.add(new Boss1(20, 4, "Bigboss", 7,enemies[2]));
     }
 
     public Enemy selectEnemy(int stage){
@@ -46,7 +46,7 @@ public class StageManager{
         }
         Enemy newEnemy = ori.clone();
         newEnemy.setBaseAtk(newEnemy.getBaseAtk() + 5*(stage/5));
-        newEnemy.setMaxHp(newEnemy.getMaxHp() + 50*(stage/5));
+        newEnemy.setMaxHp(newEnemy.getMaxHp() + 5*(stage/5));
         newEnemy.setCurHp(newEnemy.getMaxHp());
         System.out.println(newEnemy);
         return newEnemy;

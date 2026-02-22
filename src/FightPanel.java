@@ -114,6 +114,7 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
 
         if(enemy.getCurHp() <= 0){
             main.win();
+            main.addKarama(enemy.getMaxHp());
         }
         if(player.getCurHp() <= 0){
             main.gameOver();

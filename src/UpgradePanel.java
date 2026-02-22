@@ -9,7 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class UpgradePanel extends JPanel implements panelCreate {
+public class UpgradePanel extends JPanel implements panelCreate,Onenterable {
 
     private GridBagConstraints gbc;
     private JButton acceptButton,nextButton;
@@ -25,14 +25,15 @@ public class UpgradePanel extends JPanel implements panelCreate {
         gbc = new GridBagConstraints(); // attribute gbc
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.gridy = 0;
-        this.upgrade = new Upgrade(main.getKarma(), main.getPlayer(), main); // attribute upgrade
 
         acceptButton = createButton("accept");
         nextButton = createButton("next");
+
+        this.upgrade = new Upgrade(main.getKarma(), main.getPlayer(), main); // attribute upgrade
         this.showKarma = createLabel("Karma : " + main.getKarma(),36); // attribute panel
-   
-        this.maxHpUpgradePanel = new UpgradeStatPanel("MaxHp",15,upgrade,showKarma); // attribute maxHpPanel and damage
-        this.baseAtkUpgradePanel = new UpgradeStatPanel("Damage",35,upgrade,showKarma);
+
+        this.maxHpUpgradePanel = new UpgradeStatPanel("MaxHp",2,upgrade,showKarma); // attribute maxHpPanel and damage
+        this.baseAtkUpgradePanel = new UpgradeStatPanel("Damage",2,upgrade,showKarma);
 
         JLabel label = createLabel("UPGRADES", 54);
         JPanel statGroup = new JPanel(new FlowLayout());
@@ -63,6 +64,17 @@ public class UpgradePanel extends JPanel implements panelCreate {
         button.setPreferredSize(new Dimension(100 , 40));
         return button;
     }
+
+    @Override
+    public void onEnter(MainPanel main){
+        upgrade.setPlayer(main.getPlayer());
+        upgrade.getCurrentStatus();
+        upgrade.setPoints(main.getKarma());
+        showKarma.setText("Karma: "+main.getKarma());
+        maxHpUpgradePanel.updateValue();
+        baseAtkUpgradePanel.updateValue();
+    }
+
     @Override
     public JLabel createLabel(String name,int size){
         JLabel label = new JLabel(name);
@@ -70,5 +82,4 @@ public class UpgradePanel extends JPanel implements panelCreate {
         label.setFont(new Font("Arial", Font.BOLD, size));
         return  label;
     }
-
 }
