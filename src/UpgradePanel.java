@@ -9,7 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class UpgradePanel extends JPanel implements panelCreate {
+public class UpgradePanel extends JPanel implements panelCreate , Updateable {
 
     private GridBagConstraints gbc;
     private JButton acceptButton,nextButton;
@@ -17,15 +17,17 @@ public class UpgradePanel extends JPanel implements panelCreate {
     private UpgradeStatPanel baseAtkUpgradePanel;
     private Upgrade upgrade;
     private JLabel showKarma;
+    private MainPanel main;
 
     public UpgradePanel(MainPanel main) {
+        this.main = main;
         setLayout(new GridBagLayout());
         setBackground(Color.BLACK);
 
         gbc = new GridBagConstraints(); // attribute gbc
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.gridy = 0;
-        this.upgrade = new Upgrade(main.getKarma(), main.getPlayer(), main); // attribute upgrade
+        this.upgrade = new Upgrade(main , this); // attribute upgrade
 
         acceptButton = createButton("accept");
         nextButton = createButton("next");
@@ -69,6 +71,17 @@ public class UpgradePanel extends JPanel implements panelCreate {
         label.setForeground(Color.WHITE);
         label.setFont(new Font("Arial", Font.BOLD, size));
         return  label;
+    }
+    @Override
+    public void update(){
+        // this.main.getUpgradePanel().getUpgrade().getCurrentStatus();
+        this.showKarma.setText("Karma : " + this.main.getKarma());
+        this.maxHpUpgradePanel.update();
+        this.baseAtkUpgradePanel.update();
+    }
+    
+    public Upgrade getUpgrade(){
+        return this.upgrade;
     }
 
 }

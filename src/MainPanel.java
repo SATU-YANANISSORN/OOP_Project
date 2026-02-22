@@ -16,17 +16,21 @@ public class MainPanel extends JPanel {
     private String prevScene;
     private String curScene;
 
+    private UpgradePanel upgradePanel;
+
     public MainPanel() {
         //กำหนด player ก่อน upgrade ถึงจะทำงานได้ 
         //player = new Player(150,35,"Dragon warrior I HERE PO",20);
         setLayout(layout);
         setPreferredSize(new Dimension(1280, 720));
-
+        
+        newPlayer();
+        upgradePanel = new UpgradePanel(this);
         add(new TitlePanel(this), "TITLE");
         add(new FightPanel(this), "GAME");
         add(new PausePanel(this), "PAUSE");
         add(new SettingsPanel(this), "SETTINGS");
-        // add(new UpgradePanel(this), "UPGRADES");
+        add(upgradePanel, "UPGRADES");
         add(new GameOverPanel(this), "GAMEOVER");
         add(new WinPanel(this),"WIN");
 
@@ -35,7 +39,7 @@ public class MainPanel extends JPanel {
 
         showScene("TITLE");
 
-        newPlayer();
+        
     }
 
     public void newPlayer(){
@@ -80,6 +84,10 @@ public class MainPanel extends JPanel {
         showScene("WIN");
     }
 
+    public UpgradePanel getUpgradePanel(){
+        return this.upgradePanel;
+    }
+
     public void gameOver(){
         showScene("GAMEOVER");
     }
@@ -107,6 +115,12 @@ public class MainPanel extends JPanel {
         return false;
     }
 
+    
+    public void increasedKarma(int increase){
+        karma += increase;
+    }
+
+    
     public void addKarama(int add){
         karma += add;
     }
@@ -126,7 +140,6 @@ public class MainPanel extends JPanel {
     public void nextStage(){
         stage++;
     }
-
 
 }
 

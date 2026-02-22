@@ -21,7 +21,10 @@ public class WinPanel extends JPanel implements Onenterable {
                     System.out.println(stage);
 
                     if (stage % 5 == 0) {
-                        main.showScene("UPGRADE");
+                        main.increasedKarma(5);
+                        main.getUpgradePanel().getUpgrade().getCurrentStatus();
+                        main.getUpgradePanel().update();
+                        main.showScene("UPGRADES");
                     } else {
                         main.showScene("GAME");
                     }
