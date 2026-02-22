@@ -31,7 +31,7 @@ public class UpgradePanel extends JPanel implements panelCreate,Onenterable {
         acceptButton = createButton("accept");
         nextButton = createButton("next");
 
-        this.upgrade = new Upgrade(main.getKarma(), main.getPlayer(), main); // attribute upgrade
+        this.upgrade = new Upgrade(main,this); // attribute upgrade
         this.showKarma = createLabel("Karma : " + main.getKarma(),36); // attribute panel
 
         this.maxHpUpgradePanel = new UpgradeStatPanel("MaxHp",2,upgrade,showKarma); // attribute maxHpPanel and damage

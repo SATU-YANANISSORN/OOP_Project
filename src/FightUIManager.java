@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
-public class UIManager {
+public class FightUIManager {
 
     private BufferedImage[] backgrounds;
     private int totalLevels = 5;
@@ -18,7 +18,7 @@ public class UIManager {
     private Enemy enemy;
     private Player player;
 
-    public UIManager(FightPanel fightPanel) {
+    public FightUIManager(FightPanel fightPanel) {
         loadImages();
 
         enemy = fightPanel.getEnemy();

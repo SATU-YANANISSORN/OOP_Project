@@ -18,7 +18,6 @@ public class Upgrade {
     }
 
     public void getCurrentStatus(){
-        this.points = this.main.getKarma();
         current.put("Damage" , this.player.getBaseAtk());
         current.put("MaxHp", this.player.getMaxHp());
         original.put("Damage" , this.player.getBaseAtk());
@@ -80,6 +79,4 @@ public class Upgrade {
         getCurrentStatus();
         player.setCurHp(player.getMaxHp());
     }
-
-
 }

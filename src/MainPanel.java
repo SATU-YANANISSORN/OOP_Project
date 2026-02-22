@@ -42,7 +42,7 @@ public class MainPanel extends JPanel {
     }
 
     public void newPlayer(){
-        player = new Player(10,5,"Player",10);
+        player = new Player(10,999,"Player",10);
     }
 
     private void update(){
@@ -82,6 +82,7 @@ public class MainPanel extends JPanel {
     public void win(){
         showScene("WIN");
         karma += 1 + (stage/5);
+
     }
 
     public UpgradePanel getUpgradePanel(){
@@ -124,15 +125,9 @@ public class MainPanel extends JPanel {
         return false;
     }
 
-    
-    public void increasedKarma(int increase){
-        karma += increase;
-    }
-
-    
-    public void addKarama(int add){
-        karma += add;
-    }
+    // public void addKarama(int add){
+    //     karma += add;
+    // }
 
     public Player getPlayer(){
         return player;

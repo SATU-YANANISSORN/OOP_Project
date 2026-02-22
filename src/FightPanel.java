@@ -26,7 +26,7 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
 
     private MainPanel main;
 
-    private UIManager uiManager;
+    private FightUIManager uiManager;
 
     private List<DamageText> damageTexts = new ArrayList<>();
 
@@ -164,7 +164,6 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
 
         } else {
             main.win();
-            main.addKarama(enemy.getMaxHp());
         }
 
         for (int i = 0; i < damageTexts.size(); i++) {
@@ -256,7 +255,7 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
         stage = main.getStage();
         enemy = stageManager.selectEnemy(stage);
         player = main.getPlayer();
-        uiManager = new UIManager(this);
+        uiManager = new FightUIManager(this);
         curfadeTime = fadeTime;
         isGamewin = false;
         randomNewWord();
