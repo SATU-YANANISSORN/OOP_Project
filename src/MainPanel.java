@@ -38,7 +38,7 @@ public class MainPanel extends JPanel {
     }
 
     public void newPlayer(){
-        player = new Player(10,99,"Player",10);
+        player = new Player(10,5,"Player",10);
     }
 
     private void update(){

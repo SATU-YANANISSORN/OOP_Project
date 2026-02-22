@@ -71,7 +71,8 @@ public class UIManager {
         BufferedImage bg = backgrounds[bgIndex];
 
         if (bg != null) {
-            g2.drawImage(bg, 0, 0, w, h, null);
+            int margin = 50;
+            g2.drawImage(bg, -margin, -margin, w+margin*2, h+margin*2, null);
         }
     }
 

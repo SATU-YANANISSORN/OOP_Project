@@ -85,9 +85,11 @@ public abstract class Entity{
         return name + ":CurHp="+curHp;
     }
 
-    public void dealDamage(Entity target){
-        target.takeDamage(baseAtk);
+    public int dealDamage(Entity target){
+        int damage = baseAtk;
+        target.takeDamage(damage);
         addCurMp(1);
+        return damage;
         // System.out.println(target);
     };
 }
