@@ -34,8 +34,9 @@ public class UpgradePanel extends JPanel implements panelCreate,Onenterable {
         this.upgrade = new Upgrade(main,this); // attribute upgrade
         this.showKarma = createLabel("Karma : " + main.getKarma(),36); // attribute panel
 
-        this.maxHpUpgradePanel = new UpgradeStatPanel("MaxHp",2,upgrade,showKarma); // attribute maxHpPanel and damage
-        this.baseAtkUpgradePanel = new UpgradeStatPanel("Damage",2,upgrade,showKarma);
+        this.maxHpUpgradePanel = new UpgradeStatPanel("MaxHp",2,upgrade,showKarma,"img/upgradePanel2.png"); // attribute maxHpPanel and damage
+        this.baseAtkUpgradePanel = new UpgradeStatPanel("Damage",2,upgrade,showKarma,"img/upgradePanel2.png");
+        
 
         JLabel label = createLabel("UPGRADES", 54);
         JPanel statGroup = new JPanel(new FlowLayout());
@@ -46,6 +47,7 @@ public class UpgradePanel extends JPanel implements panelCreate,Onenterable {
 
         statGroup.add(maxHpUpgradePanel);
         statGroup.add(baseAtkUpgradePanel);
+        
         add(label, gbc);
         gbc.gridy++;
         add(showKarma,gbc);
@@ -81,7 +83,7 @@ public class UpgradePanel extends JPanel implements panelCreate,Onenterable {
     public JLabel createLabel(String name,int size){
         JLabel label = new JLabel(name);
         label.setForeground(Color.WHITE);
-        label.setFont(new Font("Arial", Font.BOLD, size));
+        label.setFont(new Font("Serif", Font.BOLD, size));
         return  label;
     }
     public Upgrade getUpgrade(){
