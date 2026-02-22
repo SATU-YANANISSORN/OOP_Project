@@ -8,6 +8,7 @@ public class Upgrade {
     private Map<String,Integer> original = new HashMap<>();
     private Player player;
     private MainPanel main;
+    private int cost = 5;
  
     public Upgrade(int points, Player player , MainPanel main){
         this.points = points;
@@ -42,17 +43,21 @@ public class Upgrade {
     public int getDifUseAndPoints(){
         return this.points - this.use;
     }
+
+    public void setCost(int cost){
+        this.cost = cost;
+    }
     
     public void UpgradeStatus(String type , int amount , boolean Increase){
         if(Increase){
-            if (this.use + 10 <= this.points){
+            if (this.use + cost <= this.points){
                 current.put(type, current.get(type) + amount);
-                this.use += 10;
+                this.use += cost;
             }
         }else {
-            if (this.use >= 10 && current.get(type) > original.get(type)) {
+            if (this.use >= cost && current.get(type) > original.get(type)) {
                 current.put(type, current.get(type) - amount);
-                this.use -= 10;
+                this.use -= cost;
             }
         }
     }
