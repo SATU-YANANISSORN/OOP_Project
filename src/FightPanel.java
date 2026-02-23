@@ -16,6 +16,8 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
     private Player player;
     private int stage;
 
+    private SoundManager sound;
+
     private Bar enemyHp;
     private Bar playerHp;
     private Bar playerMp;
@@ -44,9 +46,13 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
     public FightPanel(MainPanel main) {
 
         this.main = main;
+        this.sound = main.getSoundManager();
 
         setLayout(null);
         setPreferredSize(new Dimension(1280, 720));
+
+        setFocusable(true);
+        setFocusTraversalKeysEnabled(false);
 
         stageManager = new StageManager();
         combo = new Combo();
@@ -91,6 +97,7 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
             @Override
             public void actionPerformed(ActionEvent e) {
                 player.untimate(enemy, combo.getValue());
+                sound.playSFX("/Sound/Ulti_test.wav");
                 System.out.println("ULTIMATE");
             }
         });
@@ -100,6 +107,7 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
             @Override
             public void actionPerformed(ActionEvent e) {
                 player.thunder(enemy, combo.getValue());
+                sound.playSFX("/Sound/Light.wav");
                 System.out.println("Thunderrrr");
             }
         });
@@ -109,6 +117,7 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
             @Override
             public void actionPerformed(ActionEvent e) {
                 player.Heal();
+                sound.playSFX("/Sound/Heal.wav");
                 System.out.println("HEAL");
             }
         });
@@ -122,6 +131,7 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
                     player.setDodge(true);
                     dodgeCdCount = dodgeCd*1000;
                     dodgeDurationCount = dodgeDuration * 1000;
+                    sound.playSFX("/Sound/Doge.wav");
                 }
             }
         });
@@ -134,6 +144,7 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
             curW = curW.substring(1, curW.length());
 
             if (curW.length() == 0) {
+                sound.playSFX("/Sound/Hit.wav"); // เสียงผู้เล่นตีโดน
                 damageTexts.add(new DamageText(player.dealDamage(enemy), getWidth() / 2, getHeight() / 2));
                 combo.increase();
                 randomNewWord();
@@ -191,6 +202,7 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
                     enemy.dealDamage(player);
                     if(!player.isDodge){
                         shakeScreen(1);
+                        sound.playSFX("/Sound/Hit2.wav"); // เสียงโดนตี
                     }
                     System.out.println("Attack");
                     enemy.curCdAttack = 0;

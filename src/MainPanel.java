@@ -13,6 +13,8 @@ public class MainPanel extends JPanel {
 
     private int stage = 1;
 
+    private SoundManager sound = new SoundManager();
+
     private String prevScene;
     private String curScene;
     private Combo combo;
@@ -25,6 +27,7 @@ public class MainPanel extends JPanel {
         setPreferredSize(new Dimension(1280, 720));
         newPlayer();
         combo = new Combo();
+        sound.playBGM("/Sound/Tt_ost.wav");
 
         add(new TitlePanel(this), "TITLE");
         add(new FightPanel(this), "GAME");
@@ -147,5 +150,18 @@ public class MainPanel extends JPanel {
 
     public Combo getCombo(){
         return combo;
+    }
+    
+
+    public SoundManager getSoundManager() {
+        return sound;
+    }
+    
+    public void setMusicVolume(int volume){
+    sound.setBGMVolume(volume);
+    }
+
+    public void setSFXVolume(int volume){
+        sound.setSFXVolume(volume);
     }
 }

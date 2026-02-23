@@ -78,8 +78,10 @@ public class SettingsPanel extends JPanel {
     private void adjust(int value) {
         if (selected == 0) {
             musicVolume = Math.max(0, Math.min(100, musicVolume + value));
+            main.setMusicVolume(musicVolume);
         } else if (selected == 1) {
             sfxVolume = Math.max(0, Math.min(100, sfxVolume + value));
+            main.setSFXVolume(sfxVolume);
         }
         repaint();
     }
