@@ -3,8 +3,8 @@ import java.awt.image.BufferedImage;
 
 public class Monster extends Enemy{
 
-    public Monster(int maxHp,int baseAtk,String name,float cdAttack,BufferedImage enemyImage){
-        super(maxHp, baseAtk, name, cdAttack,enemyImage);
+    public Monster(int maxHp,int baseAtk,String name,float cdAttack,BufferedImage[] enemyImage,float prepareDuration){
+        super(maxHp, baseAtk, name, cdAttack,enemyImage,prepareDuration);
     }
 
     public void attackSkill(Entity target,int combo){

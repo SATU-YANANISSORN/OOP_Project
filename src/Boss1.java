@@ -3,8 +3,8 @@ import java.awt.image.BufferedImage;
 
 public class Boss1 extends Enemy{
 
-    public Boss1(int maxHp,int baseAtk,String name,float cdAttack,BufferedImage enemyImage){
-        super(maxHp, baseAtk, name, cdAttack,enemyImage);
+    public Boss1(int maxHp,int baseAtk,String name,float cdAttack,BufferedImage[] enemyImage,float prepareDuration){
+        super(maxHp, baseAtk, name, cdAttack,enemyImage,prepareDuration);
     }
 
     public void bossskill(Entity target,int combo){

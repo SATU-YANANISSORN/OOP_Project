@@ -29,7 +29,7 @@ public class DamageText {
 
         // เคลื่อนลงขวาล่าง
         x += 200 * delta;
-        y += 700 * delta;
+        y += 500 * delta;
     }
 
     public boolean isDead() {

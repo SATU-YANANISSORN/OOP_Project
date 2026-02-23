@@ -29,10 +29,12 @@ public class Player extends Entity {
     }
 
     public void Heal(){
-        if(curMp < 2){
-            return;
+        if(curHp != maxHp){
+            if(curMp < 2){
+                return;
+            }
+            curHp = Math.min(curHp + maxHp/10, maxHp);
+            decreseCurMp(2);
         }
-        curHp = Math.min(curHp + maxHp/10, maxHp);
-        decreseCurMp(2);
     }
 }

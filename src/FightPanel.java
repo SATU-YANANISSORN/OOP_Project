@@ -34,10 +34,12 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
     private float shakeStrength = 0.5f;
     private Random random = new Random();
 
-    private float dodgeDuration = 1f;
-    private float dodgeDurationCount = 0f;
+    private float dodgeDuration = 0.5f;
+    private float dodgeDurationCount = 0f;//count var
     private float dodgeCd = 2f;
-    private float dodgeCdCount = 0f;
+    private float dodgeCdCount = 0f;//count var
+    
+    private float prepareDuration = 750f;
 
     public FightPanel(MainPanel main) {
 
@@ -116,8 +118,11 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("DODGE");
-                player.setDodge(true);
-                dodgeDurationCount = dodgeDuration * 1000;
+                if(dodgeCdCount <= 0){
+                    player.setDodge(true);
+                    dodgeCdCount = dodgeCd*1000;
+                    dodgeDurationCount = dodgeDuration * 1000;
+                }
             }
         });
 
@@ -148,25 +153,22 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
 
         long now = System.currentTimeMillis();
 
-        if(dodgeCdCount <= 0){
-            if(player.getIsDodge()){
-                dodgeCdCount = dodgeCd*1000;
-                if(dodgeDurationCount > 0){
-                    dodgeDurationCount -= 16;
-                }
-                else{
-                    player.setDodge(false);
-                }
-            }
+        if(dodgeCdCount > 0){
+            dodgeCdCount -= 16;
+        }
+
+        if(dodgeDurationCount > 0){
+            dodgeDurationCount -= 16;
         }
         else{
-            dodgeCdCount -= 16;
+            player.setDodge(false);
         }
 
         if (!isGamewin) {
             if (enemy.getCurHp() <= 0) {
                 curWord = " ";
                 curfadeTime += 16;
+                enemy.setDeath();
                 if (curfadeTime >= fadeTime * 1000) {
                     isGamewin = true;
                 }
@@ -177,13 +179,14 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
 
             if (!preparingAttack) {
                 enemy.curCdAttack += 16;
-                if (enemy.curCdAttack >= enemy.cdAttack * 1000) {
+                if (enemy.curCdAttack >= enemy.getCdAtk() * 1000) {
                     System.out.println("prepare");
                     preparingAttack = true;
+                    enemy.setPrepare();
                     prepareStart = now;
                 }
             } else {
-                if (now - prepareStart >= 1000) {
+                if (now - prepareStart >= enemy.getPrepareDuration()) {
                     System.out.println("IS DODGE :"+player.getIsDodge());
                     enemy.dealDamage(player);
                     if(!player.isDodge){

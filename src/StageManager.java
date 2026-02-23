@@ -14,12 +14,37 @@ public class StageManager{
     }
 
     private void setupData(){
-        BufferedImage[] enemies = new BufferedImage[3];
+        // BufferedImage[] enemies = new BufferedImage[3];
 
+        BufferedImage[][] m = new BufferedImage[3][4];
+
+        BufferedImage[][] b = new BufferedImage[3][4];
         try {
-            for (int i = 0; i < 3; i++) {
-                enemies[i] = ImageIO.read(
-                    getClass().getResource("/img/ch" + (i + 1) + ".png"));
+            // for (int i = 0; i < 3; i++) {
+            //     enemies[i] = ImageIO.read(
+            //         getClass().getResource("/img/ch" + (i + 1) + ".png"));
+            // }
+
+            for (int i=0;i<m.length;i++){
+                for(int j=0;j<m[i].length;j++){
+                    m[i][j] = ImageIO.read(
+                        getClass().getResource("/img/M" + (i+1) + (char)('A'+j) + ".png")
+                    );
+                }
+            }
+
+            for (int i=0;i<b.length;i++){
+                for(int j=0;j<b[i].length;j++){
+                    b[i][j] = ImageIO.read(
+                        getClass().getResource("/img/B" + (i+1) + (char)('A'+j) + ".png")
+                    );
+                }
+            }
+
+            for (int i=0;i<b.length;i++){
+                for(int j=0;j<b[i].length;i++){
+
+                }
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -27,11 +52,13 @@ public class StageManager{
         }
 
         monsterList = new ArrayList<>();
-        monsterList.add(new Monster(10,2,"Skeleton",5,enemies[0]));
-        monsterList.add(new Monster(15,4,"Tank",7,enemies[1]));
+        monsterList.add(new Monster(10,2,"Skeleton",5,m[0],2));
+        monsterList.add(new Monster(15,4,"necromancer",5,m[1],1));
+        monsterList.add(new Monster(20,1,"tank",7,m[2],2));
 
         bossList = new ArrayList<>();
-        bossList.add(new Boss1(20, 4, "Bigboss", 7,enemies[2]));
+        bossList.add(new Boss1(20, 5, "claw", 5,b[0],1));
+        bossList.add(new Boss2(1,6,"Maruko",5,b[1],1));
     }
 
     public Enemy selectEnemy(int stage){
