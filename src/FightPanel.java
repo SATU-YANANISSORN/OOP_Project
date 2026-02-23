@@ -34,6 +34,11 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
     private float shakeStrength = 0.5f;
     private Random random = new Random();
 
+    private float dodgeDuration = 1f;
+    private float dodgeDurationCount = 0f;
+    private float dodgeCd = 2f;
+    private float dodgeCdCount = 0f;
+
     public FightPanel(MainPanel main) {
 
         this.main = main;
@@ -106,6 +111,16 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
             }
         });
 
+        inputMap.put(KeyStroke.getKeyStroke("SPACE"), "dodge");
+        actionMap.put("dodge", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("DODGE");
+                player.setDodge(true);
+                dodgeDurationCount = dodgeDuration * 1000;
+            }
+        });
+
     }
 
     private void checkChar(char keyChar) {
@@ -133,6 +148,21 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
 
         long now = System.currentTimeMillis();
 
+        if(dodgeCdCount <= 0){
+            if(player.getIsDodge()){
+                dodgeCdCount = dodgeCd*1000;
+                if(dodgeDurationCount > 0){
+                    dodgeDurationCount -= 16;
+                }
+                else{
+                    player.setDodge(false);
+                }
+            }
+        }
+        else{
+            dodgeCdCount -= 16;
+        }
+
         if (!isGamewin) {
             if (enemy.getCurHp() <= 0) {
                 curWord = " ";
@@ -154,8 +184,11 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
                 }
             } else {
                 if (now - prepareStart >= 1000) {
+                    System.out.println("IS DODGE :"+player.getIsDodge());
                     enemy.dealDamage(player);
-                    shakeScreen(1);
+                    if(!player.isDodge){
+                        shakeScreen(1);
+                    }
                     System.out.println("Attack");
                     enemy.curCdAttack = 0;
                     preparingAttack = false;
