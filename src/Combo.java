@@ -27,4 +27,8 @@ public class Combo {
         }
         return 0; // ถ้ายังไม่ถึง 2 ไม่บวกดาเมจ
     }
+
+    public void x2Value(){
+        currentCount = currentCount*2;
+    }
 }

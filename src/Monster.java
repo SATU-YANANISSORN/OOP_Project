@@ -7,14 +7,15 @@ public class Monster extends Enemy{
         super(maxHp, baseAtk, name, cdAttack,enemyImage,prepareDuration);
     }
 
-    public void attackSkill(Entity target,int combo){
+    public int attackSkill(Entity target,int combo){
         Skill Bs = (t,c,d) ->{
-            if(curMp >= c){
-                target.takeDamage(d);
-                decreseCurMp(c);
+            if(curMp < c){
+                return 0;
             }
+            decreseCurMp(c);
+            return target.takeDamage(d);
         };
-        Bs.skill(target,1,5);
+        return Bs.skill(target,1,5);
     }
 
     

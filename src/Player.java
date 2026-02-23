@@ -4,37 +4,41 @@ public class Player extends Entity {
         super(maxHp,baseAtk,name,Maxmp);
     }
 
-    public void thunder(Entity target,int combo){
+    public int thunder(Entity target,int combo){
         Skill s = (t,c,d) ->{
             if(curMp < c){
-                return;
+                return 0;
             }
-            target.takeDamage(d);
             decreseCurMp(c);
+            return target.takeDamage(d);
         };
 
-        s.skill(target,2,combo*2);
+        return s.skill(target,2,combo*2);
     }
 
-    public void untimate(Entity target,int combo){
+    public int untimate(Entity target,int combo){
         Skill s = (t,c,d) ->{
             if(curMp < c){
-                return;
+                return 0;
             }
-            target.takeDamage(d);
             decreseCurMp(c);
+            return target.takeDamage(d);
         };
 
-        s.skill(target,7,baseAtk*10 + (baseAtk *combo/10));
+        return s.skill(target,7,baseAtk*10 + (baseAtk *combo/10));
     }
 
-    public void Heal(){
+    public int Heal(){
+        int healNum = 0;
         if(curHp != maxHp){
             if(curMp < 2){
-                return;
+                return 0;
             }
-            curHp = Math.min(curHp + maxHp/10, maxHp);
             decreseCurMp(2);
+            int tem = curHp;
+            curHp = Math.min(curHp + maxHp/10, maxHp);
+            healNum = curHp - tem;
         }
+        return healNum;
     }
 }

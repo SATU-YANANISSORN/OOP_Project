@@ -7,10 +7,14 @@ public class Boss2 extends Enemy{
         super(maxHp, baseAtk, name, cdAttack,enemyImage,prepareDuration);
     }
 
-    public void bossskill(Entity target,int combo){
+    public int bossskill(Entity target,int combo){
         Skill Bs = (t,c,d) ->{
-                target.takeDamage(d);
+            if(curMp < c){
+                return 0;
+            }
+            decreseCurMp(c);
+            return target.takeDamage(d);
         };
-        Bs.skill(target,1,baseAtk);
+        return Bs.skill(target,1,baseAtk);
     } 
 }

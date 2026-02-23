@@ -18,7 +18,7 @@ public class StageManager{
 
         BufferedImage[][] m = new BufferedImage[3][4];
 
-        BufferedImage[][] b = new BufferedImage[3][4];
+        BufferedImage[][] b = new BufferedImage[2][4];
         try {
             // for (int i = 0; i < 3; i++) {
             //     enemies[i] = ImageIO.read(

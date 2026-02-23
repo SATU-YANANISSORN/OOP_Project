@@ -30,7 +30,7 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
 
     private FightUIManager uiManager;
 
-    private List<DamageText> damageTexts = new ArrayList<>();
+    private List<MovingText> movingTexts = new ArrayList<>();
 
     private int shakeDuration = 0;
     private float shakeStrength = 0.5f;
@@ -96,9 +96,11 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
         actionMap.put("skill_up", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                player.untimate(enemy, combo.getValue());
-                sound.playSFX("/Sound/Ulti_test.wav");
-                System.out.println("ULTIMATE");
+                int damage = player.untimate(enemy, combo.getValue());
+                if(damage > 0){
+                    movingTexts.add(new MovingText(String.valueOf(damage), getWidth()/2,getHeight()/2,Color.RED));
+                    sound.playSFX("/Sound/Ulti_test.wav");
+                }
             }
         });
 
@@ -106,9 +108,23 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
         actionMap.put("skill_left", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                player.thunder(enemy, combo.getValue());
-                sound.playSFX("/Sound/Light.wav");
-                System.out.println("Thunderrrr");
+                int damage = player.thunder(enemy, combo.getValue());
+                if(damage > 0){
+                    movingTexts.add(new MovingText(String.valueOf(damage),getWidth()/2,getHeight()/2,Color.red));
+                    sound.playSFX("/Sound/Light.wav");
+                }
+            }
+        });
+
+        inputMap.put(KeyStroke.getKeyStroke("RIGHT"), "skill_right");
+        actionMap.put("skill_right", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(player.getCurMp() >= 5){
+                    combo.x2Value();
+                    player.decreseCurMp(5);
+                    sound.playSFX("/Sound/Buff.wav");
+                }
             }
         });
 
@@ -116,9 +132,11 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
         actionMap.put("skill_down", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                player.Heal();
-                sound.playSFX("/Sound/Heal.wav");
-                System.out.println("HEAL");
+                int healNum = player.Heal();
+                if(healNum > 0){
+                    movingTexts.add(new MovingText("+"+String.valueOf(healNum),getWidth()/2 - 130,getHeight() - 50,Color.YELLOW));
+                    sound.playSFX("/Sound/Heal.wav");
+                }
             }
         });
 
@@ -126,7 +144,6 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
         actionMap.put("dodge", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("DODGE");
                 if(dodgeCdCount <= 0){
                     player.setDodge(true);
                     dodgeCdCount = dodgeCd*1000;
@@ -145,7 +162,7 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
 
             if (curW.length() == 0) {
                 sound.playSFX("/Sound/Hit.wav"); // เสียงผู้เล่นตีโดน
-                damageTexts.add(new DamageText(player.dealDamage(enemy), getWidth() / 2, getHeight() / 2));
+                movingTexts.add(new MovingText(String.valueOf(player.dealDamage(enemy)), getWidth() / 2, getHeight() / 2,Color.RED));
                 combo.increase();
                 randomNewWord();
             } else {
@@ -198,13 +215,18 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
                 }
             } else {
                 if (now - prepareStart >= enemy.getPrepareDuration() && enemy.getCurHp() > 0) {
-                    System.out.println("IS DODGE :"+player.getIsDodge());
-                    enemy.dealDamage(player);
+                    if(enemy instanceof Boss1 u){
+                        int healNum = u.dealDamage(player);
+                        if(healNum > 0)
+                            movingTexts.add(new MovingText("+"+String.valueOf(healNum), getWidth()/2 + 20, 20, Color.YELLOW));
+                    }
+                    else{
+                        enemy.dealDamage(player);
+                    }
                     if(!player.isDodge){
                         shakeScreen(1);
                         sound.playSFX("/Sound/Hit2.wav"); // เสียงโดนตี
                     }
-                    System.out.println("Attack");
                     enemy.curCdAttack = 0;
                     preparingAttack = false;
                 }
@@ -214,11 +236,11 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
             main.win();
         }
 
-        for (int i = 0; i < damageTexts.size(); i++) {
-            DamageText dt = damageTexts.get(i);
+        for (int i = 0; i < movingTexts.size(); i++) {
+            MovingText dt = movingTexts.get(i);
             dt.update(0.016f);
             if (dt.isDead()) {
-                damageTexts.remove(i);
+                movingTexts.remove(i);
             }
         }
 
@@ -269,7 +291,6 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
         int y = (h + textHeight) / 2 - 225;
 
         g2.drawString(word, x, y);
-        //
 
         Font fontSmall = new Font("Serif", Font.BOLD, 40);
 
@@ -293,7 +314,7 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
 
         g2.drawString(stageText, stageX, stageY);
 
-        for (DamageText dt : damageTexts) {
+        for (MovingText dt : movingTexts) {
             dt.draw(g2);
         }
     }
@@ -307,7 +328,7 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
         curfadeTime = fadeTime;
         isGamewin = false;
         randomNewWord();
-        damageTexts.clear();
+        movingTexts.clear();
         shakeDuration = 0;
 
         preparingAttack = false;

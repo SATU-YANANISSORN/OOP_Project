@@ -102,6 +102,7 @@ public class MainPanel extends JPanel {
         stage = 1;
         newPlayer();
         combo.reset();
+        sound.playBGM("/Sound/Tt_ost.wav");
         // System.out.println(karma + ":" +player);
     }
 
@@ -127,10 +128,6 @@ public class MainPanel extends JPanel {
 
         return false;
     }
-
-    // public void addKarama(int add){
-    //     karma += add;
-    // }
 
     public Player getPlayer(){
         return player;

@@ -99,6 +99,7 @@ public class FightUIManager {
             int prY = h - prH - 20;
             g2.drawImage(prof, prX, prY, prW, prH, null);
         }
+        g2.setFont(new Font("Serif",Font.PLAIN,20));
 
         if (hpEnemyBarFrame != null && enemy != null) {
             int hpW = (int) (w * 0.40);
@@ -106,7 +107,9 @@ public class FightUIManager {
             int hpX = (w - hpW) / 2;
             int hpY = (int) (h * 0.02);
             hpEnemyBar.draw(g2, hpX+25, hpY+6, hpW-50, hpH, enemy.getCurHp(), enemy.getMaxHp());
+            g2.setColor(Color.WHITE);
             g2.drawImage(hpEnemyBarFrame, hpX, hpY, hpW, hpH, null);
+            g2.drawString(String.valueOf(enemy.getCurHp()), hpX +80, hpY+50);
         }
 
         if(player != null){
@@ -116,7 +119,9 @@ public class FightUIManager {
                 int mnX = (int) (w * 0.10);
                 int mnY = h - mnH - (int) (h * 0.06);
                 mpPlayerBar.draw(g2, mnX, mnY, mnW, mnH, player.getCurMp(), player.getMaxMp());
+                g2.setColor(Color.WHITE);
                 g2.drawImage(mpPlayerBarFrame, mnX, mnY, mnW, mnH, null);
+                g2.drawString(String.valueOf(player.getCurMp()), mnX +50, mnY+37);
             }
 
             if (hpPlayerBarFrame != null) {
@@ -125,7 +130,9 @@ public class FightUIManager {
                 int hpX = (int) (w * 0.10);
                 int hpY = h - hpH - (int) (h * 0.012);
                 hpPlayerBar.draw(g2, hpX, hpY, hpW, hpH, player.getCurHp(), player.getMaxHp());
+                g2.setColor(Color.WHITE);
                 g2.drawImage(hpPlayerBarFrame, hpX, hpY, hpW, hpH, null);
+                g2.drawString(String.valueOf(player.getCurHp()), hpX+50, hpY+37);
             }
         }
 
