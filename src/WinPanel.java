@@ -74,13 +74,13 @@ public class WinPanel extends JPanel implements Onenterable {
         String stageText = "Stage " + main.getStage();
         g2.drawString(stageText,
                 (w - fm.stringWidth(stageText)) / 2,
-                y + 60);
+                y - 100);
 
         g2.setColor(Color.GRAY);
         String desText = "Press ENTER to go next stage";
         g2.drawString(desText,
                 (w - fm.stringWidth(desText)) / 2,
-                h / 2 + 100);
+                h / 2 +60);
     }
 
     @Override
