@@ -186,7 +186,7 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
                     prepareStart = now;
                 }
             } else {
-                if (now - prepareStart >= enemy.getPrepareDuration()) {
+                if (now - prepareStart >= enemy.getPrepareDuration() && enemy.getCurHp() > 0) {
                     System.out.println("IS DODGE :"+player.getIsDodge());
                     enemy.dealDamage(player);
                     if(!player.isDodge){
