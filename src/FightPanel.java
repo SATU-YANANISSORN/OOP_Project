@@ -312,6 +312,8 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
         int stageX = 20;
         int stageY = fm2.getAscent() + 20;
 
+        
+
         g2.drawString(stageText, stageX, stageY);
 
         for (MovingText dt : movingTexts) {

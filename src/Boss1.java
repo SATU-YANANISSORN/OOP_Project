@@ -21,8 +21,7 @@ public class Boss1 extends Enemy{
 
     @Override
     public int dealDamage(Entity target){
-        int damage = baseAtk;
-        target.takeDamage(damage);
+        int damage = target.takeDamage(baseAtk);
         addCurHp(damage);
         addCurMp(1);
         setAttack();
