@@ -35,9 +35,8 @@ public class UpgradePanel extends JPanel implements panelCreate, Onenterable {
         this.upgrade = new Upgrade(main, this); // attribute upgrade
         this.showKarma = createLabel("Karma : " + main.getKarma(), 36); // attribute panel
 
-        this.maxHpUpgradePanel = new UpgradeStatPanel("MaxHp",2,upgrade,showKarma,"img/upgradePanel2.png"); // attribute maxHpPanel and damage
+        this.maxHpUpgradePanel = new UpgradeStatPanel("MaxHp",2,upgrade,showKarma,"img/upgradePanel5.png"); // attribute maxHpPanel and damage
         this.baseAtkUpgradePanel = new UpgradeStatPanel("Damage",2,upgrade,showKarma,"img/upgradePanel2.png");
-        
 
         JLabel label = createLabel("UPGRADES", 54);
         JPanel statGroup = new JPanel(new FlowLayout());

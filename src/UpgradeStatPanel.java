@@ -102,6 +102,9 @@ public class UpgradeStatPanel extends JPanel implements panelCreate{
 
     }
     
+    public Image getImagePanel(){
+        return this.bgImage;
+    }
     public void updateValue(){
         showStat.setText(Integer.toString(upgrade.getStatus(this.name)));
         this.showKarma.setText("Karma: " + upgrade.getDifUseAndPoints());
