@@ -36,7 +36,7 @@ public class Player extends Entity {
             }
             decreseCurMp(2);
             int tem = curHp;
-            curHp = Math.min(curHp + maxHp/10, maxHp);
+            curHp = Math.min(curHp + maxHp/5, maxHp);
             healNum = curHp - tem;
         }
         return healNum;

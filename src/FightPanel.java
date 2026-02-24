@@ -40,6 +40,8 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
     private float dodgeDurationCount = 0f;//count var
     private float dodgeCd = 2f;
     private float dodgeCdCount = 0f;//count var
+
+    private EnemyBehavivor enemyBehavivor;
     
     private float prepareDuration = 750f;
 
@@ -67,6 +69,8 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
                 main.pauseGame();
             }
         });
+
+        enemyBehavivor = new EnemyBehavivor(this,main);
 
         setKeyMap();
     }
@@ -173,13 +177,10 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
         }
     }
 
-    boolean preparingAttack = false;
-    long prepareStart = 0;
-
     @Override
     public void update() {
 
-        long now = System.currentTimeMillis();
+        // long now = System.currentTimeMillis();
 
         if(dodgeCdCount > 0){
             dodgeCdCount -= 16;
@@ -205,32 +206,7 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
                 main.gameOver();
             }
 
-            if (!preparingAttack) {
-                enemy.curCdAttack += 16;
-                if (enemy.curCdAttack >= enemy.getCdAtk() * 1000) {
-                    System.out.println("prepare");
-                    preparingAttack = true;
-                    enemy.setPrepare();
-                    prepareStart = now;
-                }
-            } else {
-                if (now - prepareStart >= enemy.getPrepareDuration() && enemy.getCurHp() > 0) {
-                    if(enemy instanceof Boss1 u){
-                        int healNum = u.dealDamage(player);
-                        if(healNum > 0)
-                            movingTexts.add(new MovingText("+"+String.valueOf(healNum), getWidth()/2 + 20, 20, Color.YELLOW));
-                    }
-                    else{
-                        enemy.dealDamage(player);
-                    }
-                    if(!player.isDodge){
-                        shakeScreen(1);
-                        sound.playSFX("/Sound/Hit2.wav"); // เสียงโดนตี
-                    }
-                    enemy.curCdAttack = 0;
-                    preparingAttack = false;
-                }
-            }
+            enemyBehavivor.update();
 
         } else {
             main.win();
@@ -247,7 +223,7 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
         repaint();
     }
 
-    private void shakeScreen(int duration) {
+    public void shakeScreen(int duration) {
         shakeDuration = duration * 1000;
     }
 
@@ -345,7 +321,7 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
         movingTexts.clear();
         shakeDuration = 0;
 
-        preparingAttack = false;
+        enemyBehavivor.setUp(enemy,player);
     }
 
     public Combo getCombo() {
@@ -361,11 +337,15 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
     }
 
     private final String[] controlText = {
-        "UP    : Ultimate",
-        "LEFT  : Thunder",
-        "RIGHT : Buff x2",
-        "DOWN  : Heal",
+        "UP    : Ultimate:deal a lot of damage",
+        "LEFT  : Thunder:deal high damage with combo",
+        "RIGHT : Buff:x2 Combo",
+        "DOWN  : Heal:heal 20% max hp",
         "SPACE : Dodge",
         "ESC   : Pause"
     };
+
+    public List<MovingText> getMovingTexts(){
+        return movingTexts;
+    }
 }

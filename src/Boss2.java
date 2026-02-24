@@ -2,19 +2,27 @@
 import java.awt.image.BufferedImage;
 
 public class Boss2 extends Enemy{
+    public int curCapHp;
+    public Combo combo;
+    public int stage;
 
     public Boss2(int maxHp,int baseAtk,String name,float cdAttack,BufferedImage[] enemyImage,float prepareDuration){
         super(maxHp, baseAtk, name, cdAttack,enemyImage,prepareDuration);
+        curCapHp = 1;
     }
 
-    public int bossskill(Entity target,int combo){
-        Skill Bs = (t,c,d) ->{
-            if(curMp < c){
-                return 0;
-            }
-            decreseCurMp(c);
-            return target.takeDamage(d);
-        };
-        return Bs.skill(target,1,baseAtk);
-    } 
+    public void setup(Combo combo,int stage){
+        this.combo = combo;
+        this.stage = stage;
+    }
+
+    @Override
+    public int takeDamage(int damage){
+        System.out.println(combo.getValue() +" "+stage);
+        if(curHp==1&&combo.getValue() >= stage){
+            curCapHp = 0;
+        }
+        curHp = Math.max(curCapHp,curHp - damage);
+        return damage;
+    }
 }
