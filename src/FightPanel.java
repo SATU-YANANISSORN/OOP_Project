@@ -168,6 +168,7 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
                 sound.playSFX("/Sound/Hit.wav"); // เสียงผู้เล่นตีโดน
                 movingTexts.add(new MovingText(String.valueOf(player.dealDamage(enemy)), getWidth() / 2, getHeight() / 2,Color.RED));
                 combo.increase();
+                main.getScoreBoard().updateCombo(combo.getValue());
                 randomNewWord();
             } else {
                 curWord = curW;
@@ -199,6 +200,7 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
                 curfadeTime += 16;
                 enemy.setDeath();
                 if (curfadeTime >= fadeTime * 1000) {
+                    main.getScoreBoard().updateStage(stage);
                     isGamewin = true;
                 }
             }
@@ -270,27 +272,43 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
 
         Font fontSmall = new Font("Serif", Font.BOLD, 40);
 
-        //combo
-        String comboText = "Combo: " + Integer.toString(combo.getValue());
+        // ===== Combo & Stage =====
         g2.setFont(fontSmall);
-
         FontMetrics fm2 = g2.getFontMetrics();
-        int comboWidth = fm2.stringWidth(comboText);
 
+        // Combo
+        String comboText = "Combo: " + combo.getValue();
+        int comboWidth = fm2.stringWidth(comboText);
         int comboX = w - comboWidth - 20;
         int comboY = fm2.getAscent() + 20;
-
         g2.drawString(comboText, comboX, comboY);
 
-        //stage
-        String stageText = "Stage: " + Integer.toString(stage);
-        int stageWidth = fm2.stringWidth(stageText);
+        // Stage
+        String stageText = "Stage: " + stage;
         int stageX = 20;
         int stageY = fm2.getAscent() + 20;
-
-        
-
         g2.drawString(stageText, stageX, stageY);
+
+
+        // ===== High Score =====
+        Font highFont = new Font("Serif", Font.PLAIN, 22);
+        g2.setFont(highFont);
+        FontMetrics fmHigh = g2.getFontMetrics();
+
+        String highStage = "Highest Stage: " + main.getScoreBoard().getMaxStage();
+        String highCombo = "Highest Combo: " + main.getScoreBoard().getMaxCombo();
+
+        // ใต้ Stage
+        int highX1 = 20;
+        int highY1 = stageY + fmHigh.getHeight();
+
+        // ใต้ Combo
+        int highComboWidth = fmHigh.stringWidth(highCombo);
+        int highX2 = w - highComboWidth - 20;
+        int highY2 = comboY + fmHigh.getHeight();
+
+        g2.drawString(highStage, highX1, highY1);
+        g2.drawString(highCombo, highX2, highY2);
         
         // ===== Control Description =====
         Font descFont = new Font("Serif", Font.PLAIN, 22);

@@ -10,7 +10,10 @@ public class TitlePanel extends JPanel {
     public JButton btnStart, btnSetting, btnExit, btnHW;
     private BufferedImage BGimg,Logo;
 
+    private MainPanel main;
+
     public TitlePanel(MainPanel main) {
+        this.main = main;
         this.setLayout(null);
 
         try {
@@ -108,5 +111,31 @@ public class TitlePanel extends JPanel {
             g2.setColor(Color.DARK_GRAY);
             g2.fillRect(0, 0, w, h);
         }
+
+        // ===== High Score =====
+        g2.setColor(Color.WHITE);
+        g2.setFont(new Font("Serif", Font.BOLD, 28));
+
+        int highStage = main.getScoreBoard().getMaxStage();
+        int highCombo = main.getScoreBoard().getMaxCombo();
+
+        String stageText = "Highest Stage: " + highStage;
+        String comboText = "Highest Combo: " + highCombo;
+
+        FontMetrics fm = g2.getFontMetrics();
+
+        // ระยะห่างจากขอบซ้ายและขอบบน
+        int paddingX = 20;
+        int paddingY = 40;
+
+        int stageX = paddingX;
+        int stageY = paddingY;
+
+        int comboX = paddingX;
+        int comboY = stageY + fm.getHeight() + 5;
+
+        g2.drawString(stageText, stageX, stageY);
+        g2.drawString(comboText, comboX, comboY);
+
     }
 }

@@ -21,6 +21,8 @@ public class MainPanel extends JPanel {
 
     private UpgradePanel upgradePanel;
 
+    private ScoreBoard scoreBoard = new ScoreBoard();
+
     public MainPanel() {
 
         setLayout(layout);
@@ -159,5 +161,9 @@ public class MainPanel extends JPanel {
 
     public void setSFXVolume(int volume){
         sound.setSFXVolume(volume);
+    }
+
+    public ScoreBoard getScoreBoard() {
+        return scoreBoard;
     }
 }
