@@ -26,9 +26,9 @@ public class UpgradePanel extends JPanel implements panelCreate, Onenterable {
         setBackground(Color.BLACK);
 
         gbc = new GridBagConstraints(); // attribute gbc
-        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.insets = new Insets(10, 0, 10, 0);
         gbc.gridy = 0;
-
+        gbc.gridx = 0;
         acceptButton = createButton("accept");
         nextButton = createButton("next");
 
@@ -42,9 +42,10 @@ public class UpgradePanel extends JPanel implements panelCreate, Onenterable {
         JPanel statGroup = new JPanel(new FlowLayout());
         statGroup.setBackground(Color.BLACK);
 
-        JPanel acceptGroup = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
+        JPanel acceptGroup = new JPanel(new FlowLayout(FlowLayout.RIGHT, 200, 0));
         acceptGroup.setOpaque(false);
-
+        UpgradeUIManager.setButtonColor(acceptButton, Color.GREEN, Color.BLACK);
+        UpgradeUIManager.setButtonColor(nextButton, Color.RED, Color.BLACK);
         statGroup.add(maxHpUpgradePanel);
         statGroup.add(baseAtkUpgradePanel);
         
@@ -56,7 +57,8 @@ public class UpgradePanel extends JPanel implements panelCreate, Onenterable {
         gbc.gridy++;
         acceptGroup.add(acceptButton);
         acceptGroup.add(nextButton);
-        add(acceptGroup, gbc);
+        gbc.insets = new Insets(0, 320, 0, 10);
+        add(acceptGroup, gbc);  
 
         this.acceptButton.addActionListener(e -> {
             this.upgrade.accept();
