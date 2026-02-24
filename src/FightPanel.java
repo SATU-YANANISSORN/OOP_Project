@@ -313,6 +313,18 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
         int stageY = fm2.getAscent() + 20;
 
         g2.drawString(stageText, stageX, stageY);
+        
+        // ===== Control Description =====
+        Font descFont = new Font("Serif", Font.PLAIN, 22);
+        g2.setFont(descFont);
+        g2.setColor(Color.WHITE);
+
+        int startX = 40;
+        int startY = h / 2 - 100;
+
+        for (int i = 0; i < controlText.length; i++) {
+            g2.drawString(controlText[i], startX, startY + i * 28);
+        }
 
         for (MovingText dt : movingTexts) {
             dt.draw(g2);
@@ -345,4 +357,13 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
     public Player getPlayer() {
         return player;
     }
+
+    private final String[] controlText = {
+        "UP    : Ultimate",
+        "LEFT  : Thunder",
+        "RIGHT : Buff x2",
+        "DOWN  : Heal",
+        "SPACE : Dodge",
+        "ESC   : Pause"
+    };
 }
