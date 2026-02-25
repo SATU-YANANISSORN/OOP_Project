@@ -13,7 +13,7 @@ public class Player extends Entity {
             return target.takeDamage(d);
         };
 
-        return s.skill(target,2,combo*2);
+        return s.skill(target,2,baseAtk + combo*2);
     }
 
     public int untimate(Entity target,int combo){
@@ -25,7 +25,7 @@ public class Player extends Entity {
             return target.takeDamage(d);
         };
 
-        return s.skill(target,7,baseAtk*10 + (baseAtk *combo/10));
+        return s.skill(target,7,baseAtk*10);
     }
 
     public int Heal(){

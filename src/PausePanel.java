@@ -90,6 +90,23 @@ public class PausePanel extends JPanel {
 
             drawCentered(g2, options[i], getHeight() / 2 + i * 60);
         }
+
+        // ===== Control Description =====
+
+        int startX = 20;
+        int startY = getHeight() / 2 - 100;
+
+        Font descFont = new Font("Serif", Font.BOLD, 22);
+        g2.setFont(descFont);
+        g2.drawString("Description", startX, startY - 30);
+
+        descFont = new Font("Serif", Font.PLAIN, 16);
+        g2.setFont(descFont);
+        g2.setColor(Color.WHITE);
+
+        for (int i = 0; i < controlText.length; i++) {
+            g2.drawString(controlText[i], startX, startY + i * 28);
+        }
     }
 
     private void drawCentered(Graphics2D g2, String text, int y) {
@@ -97,4 +114,13 @@ public class PausePanel extends JPanel {
         int x = (getWidth() - fm.stringWidth(text)) / 2;
         g2.drawString(text, x, y);
     }
+
+    private final String[] controlText = {
+        "UP    : Ultimate:deal a lot of damage",
+        "LEFT  : Thunder:deal high damage with combo",
+        "RIGHT : Buff:x2 Combo",
+        "DOWN  : Heal:heal 20% max hp",
+        "SPACE : Dodge",
+        "ESC   : Pause"
+    };
 }

@@ -353,10 +353,10 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
     }
 
     private final String[] controlText = {
-        "UP    : Ultimate:deal a lot of damage",
-        "LEFT  : Thunder:deal high damage with combo",
-        "RIGHT : Buff:x2 Combo",
-        "DOWN  : Heal:heal 20% max hp",
+        "UP    : Ultimate -7 mp",
+        "LEFT  : Thunder -2 mp",
+        "RIGHT : Buff -2 mp",
+        "DOWN  : Heal -2 mp",
         "SPACE : Dodge",
         "ESC   : Pause"
     };
