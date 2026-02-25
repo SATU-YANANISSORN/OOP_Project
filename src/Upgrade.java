@@ -70,8 +70,9 @@ public class Upgrade {
         main.decreseKarma(use);
         this.points = 0;
         this.use = 0;
-        System.out.println(main.getKarma() + " " + this.use + " " + getDifUseAndPoints());
-        current.forEach((key, value) -> System.out.println("Key: " + key + ", Value: " + value));
+        getDifUseAndPoints();
+        // System.out.println(main.getKarma() + " " + this.use + " " + getDifUseAndPoints());
+        // current.forEach((key, value) -> System.out.println("Key: " + key + ", Value: " + value));
     }
 
     public void cancel(){

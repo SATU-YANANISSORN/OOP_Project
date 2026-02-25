@@ -46,8 +46,7 @@ public class FightUIManager {
             hpPlayerBarFrame = ImageIO.read(getClass().getResource("/img/ch_HPbar.png"));
 
         } catch (Exception e) {
-            System.out.println("โหลดรูปไม่สำเร็จ!");
-            e.printStackTrace();
+            System.out.println(e);
         }
     }
 

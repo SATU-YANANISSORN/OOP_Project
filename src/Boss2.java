@@ -18,7 +18,6 @@ public class Boss2 extends Enemy{
 
     @Override
     public int takeDamage(int damage){
-        System.out.println(combo.getValue() +" "+stage);
         if(curHp==1&&combo.getValue() >= stage){
             curCapHp = 0;
         }

@@ -14,16 +14,10 @@ public class StageManager{
     }
 
     private void setupData(){
-        // BufferedImage[] enemies = new BufferedImage[3];
-
         BufferedImage[][] m = new BufferedImage[3][4];
 
         BufferedImage[][] b = new BufferedImage[2][4];
         try {
-            // for (int i = 0; i < 3; i++) {
-            //     enemies[i] = ImageIO.read(
-            //         getClass().getResource("/img/ch" + (i + 1) + ".png"));
-            // }
 
             for (int i=0;i<m.length;i++){
                 for(int j=0;j<m[i].length;j++){
@@ -38,12 +32,6 @@ public class StageManager{
                     b[i][j] = ImageIO.read(
                         getClass().getResource("/img/B" + (i+1) + (char)('A'+j) + ".png")
                     );
-                }
-            }
-
-            for (int i=0;i<b.length;i++){
-                for(int j=0;j<b[i].length;i++){
-
                 }
             }
         } catch (Exception e) {
@@ -66,7 +54,6 @@ public class StageManager{
         Enemy ori;
         if(stage % 5 == 0){
             ori = bossList.get(random.nextInt(bossList.size()));
-            System.out.println(ori);
         }
         else{
             ori = monsterList.get(random.nextInt(monsterList.size()));
@@ -75,7 +62,6 @@ public class StageManager{
         newEnemy.setBaseAtk(newEnemy.getBaseAtk() + 5*(stage/5));
         newEnemy.setMaxHp(newEnemy.getMaxHp() + 20*(stage/5));
         newEnemy.setCurHp(newEnemy.getMaxHp());
-        System.out.println(newEnemy);
         return newEnemy;
     }
 }

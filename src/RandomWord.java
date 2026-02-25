@@ -26,8 +26,4 @@ public class RandomWord{
         String randomWord = words.get(random.nextInt(words.size()));
         return randomWord;
     }
-
-    public void showAllWords(){
-        System.out.println(words);
-    }
 }

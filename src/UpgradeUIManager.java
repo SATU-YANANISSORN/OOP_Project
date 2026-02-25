@@ -10,12 +10,8 @@ public class UpgradeUIManager {
         try {
             // 1. ลองโหลดแบบ Relative Path
             File file = new File(path);
-            
-            // บรรทัดนี้จะช่วยบอกเราว่า โปรแกรมมองหาไฟล์ที่ไหนอยู่
-            System.out.println("Checking path: " + file.getAbsolutePath()); 
 
             if (file.exists()) {
-                System.out.println("✅ File Found!");
                 return ImageIO.read(file);
             } else {
                 System.err.println("❌ File Not Found at: " + file.getAbsolutePath());

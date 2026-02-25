@@ -67,7 +67,6 @@ public abstract class Enemy extends Entity implements Cloneable{
         addCurMp(1);
         setAttack();
         return damage;
-        // System.out.println(target);
     };
 
     @Override

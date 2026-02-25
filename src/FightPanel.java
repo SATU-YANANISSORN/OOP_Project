@@ -181,8 +181,6 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
     @Override
     public void update() {
 
-        // long now = System.currentTimeMillis();
-
         if(dodgeCdCount > 0){
             dodgeCdCount -= 16;
         }
@@ -311,11 +309,11 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
         g2.drawString(highCombo, highX2, highY2);
         
         // ===== Control Description =====
-        Font descFont = new Font("Serif", Font.PLAIN, 22);
+        Font descFont = new Font("Serif", Font.PLAIN, 16);
         g2.setFont(descFont);
         g2.setColor(Color.WHITE);
 
-        int startX = 40;
+        int startX = 20;
         int startY = h / 2 - 100;
 
         for (int i = 0; i < controlText.length; i++) {

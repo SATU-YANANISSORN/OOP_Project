@@ -29,7 +29,7 @@ public class UpgradePanel extends JPanel implements panelCreate, Onenterable {
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.gridy = 0;
 
-        acceptButton = createButton("accept");
+        acceptButton = createButton("upgrade");
         nextButton = createButton("next");
 
         this.upgrade = new Upgrade(main, this); // attribute upgrade

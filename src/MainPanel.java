@@ -105,7 +105,6 @@ public class MainPanel extends JPanel {
         newPlayer();
         combo.reset();
         sound.playBGM("/Sound/Tt_ost.wav");
-        // System.out.println(karma + ":" +player);
     }
 
     public void pauseGame(){

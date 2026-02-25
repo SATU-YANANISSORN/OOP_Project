@@ -38,7 +38,6 @@ public class EnemyBehavivor implements Updateable{
          if (!preparingAttack) {
                 enemy.curCdAttack += 16;
                 if (enemy.curCdAttack >= enemy.getCdAtk() * 1000) {
-                    System.out.println("prepare");
                     preparingAttack = true;
                     enemy.setPrepare();
                     prepareStart = now;
