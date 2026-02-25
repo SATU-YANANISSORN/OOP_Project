@@ -98,11 +98,11 @@ public class PausePanel extends JPanel {
 
         Font descFont = new Font("Serif", Font.BOLD, 22);
         g2.setFont(descFont);
+        g2.setColor(Color.WHITE);
         g2.drawString("Description", startX, startY - 30);
 
         descFont = new Font("Serif", Font.PLAIN, 16);
         g2.setFont(descFont);
-        g2.setColor(Color.WHITE);
 
         for (int i = 0; i < controlText.length; i++) {
             g2.drawString(controlText[i], startX, startY + i * 28);
