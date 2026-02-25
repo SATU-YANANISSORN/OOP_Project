@@ -52,7 +52,9 @@ public class WinPanel extends JPanel implements Onenterable {
         int w = getWidth();
         int h = getHeight();
 
-        g2.setFont(new Font("Serif", Font.BOLD, 90));
+        g2.setFont(FontLoader.customFont
+                    .deriveFont(90f)
+                    .deriveFont(Font.BOLD));
 
         String text = "VICTORY ACHIEVED";
         FontMetrics fm = g2.getFontMetrics();
@@ -68,7 +70,9 @@ public class WinPanel extends JPanel implements Onenterable {
         g2.drawString(text, x, y);
 
         // แสดงเลขด่าน
-        g2.setFont(new Font("Serif", Font.PLAIN, 30));
+        g2.setFont(FontLoader.customFont
+                    .deriveFont(30f)
+                    .deriveFont(Font.PLAIN));
         fm = g2.getFontMetrics();
         g2.setColor(Color.GRAY);
         String stageText = "Stage " + main.getStage();

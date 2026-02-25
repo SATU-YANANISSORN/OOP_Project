@@ -33,7 +33,9 @@ public class UpgradeStatPanel extends JPanel implements panelCreate{
 
         // 2. แอดชื่อ Stat ลงใน "this" โดยตรง
         JLabel nameLabel = new JLabel(name);
-        nameLabel.setFont(new Font("Serif", Font.BOLD, 20));
+        nameLabel.setFont(FontLoader.customFont
+                            .deriveFont(20f)
+                            .deriveFont(Font.BOLD));
         nameLabel.setForeground(Color.WHITE);
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -87,7 +89,9 @@ public class UpgradeStatPanel extends JPanel implements panelCreate{
     public JLabel createLabel(String name,int size){
         JLabel label = new JLabel(name);
         label.setForeground(Color.WHITE);
-        label.setFont(new Font("Serif", Font.BOLD, size));
+        label.setFont(FontLoader.customFont
+                        .deriveFont((float)size)
+                        .deriveFont(Font.BOLD));
         return  label;
     }
 

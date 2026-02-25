@@ -73,12 +73,16 @@ public class PausePanel extends JPanel {
         g2.fillRect(0, 0, getWidth(), getHeight());
 
         // ===== Title =====
-        g2.setFont(new Font("Serif", Font.BOLD, 80));
+        g2.setFont(FontLoader.customFont
+                    .deriveFont(80f)
+                    .deriveFont(Font.BOLD));
         g2.setColor(new Color(180, 0, 0));
         drawCentered(g2, "PAUSED", getHeight() / 3);
 
         // ===== Menu Options =====
-        g2.setFont(new Font("Serif", Font.PLAIN, 40));
+        g2.setFont(FontLoader.customFont
+                    .deriveFont(40f)
+                    .deriveFont(Font.PLAIN));
 
         for (int i = 0; i < options.length; i++) {
 
@@ -96,12 +100,16 @@ public class PausePanel extends JPanel {
         int startX = 20;
         int startY = getHeight() / 2 - 100;
 
-        Font descFont = new Font("Serif", Font.BOLD, 22);
+        Font descFont = FontLoader.customFont
+                        .deriveFont(22f)
+                        .deriveFont(Font.BOLD);
         g2.setFont(descFont);
         g2.setColor(Color.WHITE);
         g2.drawString("Description", startX, startY - 30);
 
-        descFont = new Font("Serif", Font.PLAIN, 16);
+        descFont = FontLoader.customFont
+                    .deriveFont(26f)
+                    .deriveFont(Font.PLAIN);
         g2.setFont(descFont);
 
         for (int i = 0; i < controlText.length; i++) {

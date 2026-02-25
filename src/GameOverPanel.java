@@ -43,7 +43,9 @@ public class GameOverPanel extends JPanel implements Updateable, Onenterable {
         g2.setComposite(AlphaComposite.getInstance(
                 AlphaComposite.SRC_OVER, alpha));
 
-        g2.setFont(new Font("Serif", Font.BOLD, 120));
+        g2.setFont(FontLoader.customFont
+                    .deriveFont(120f)
+                    .deriveFont(Font.BOLD));
         g2.setColor(new Color(139, 0, 0)); // แดงเข้ม
 
         String text = "YOU DIED";
@@ -55,10 +57,14 @@ public class GameOverPanel extends JPanel implements Updateable, Onenterable {
         g2.drawString(text, x, y);
 
         // ข้อความเล็กด้านล่าง
-        g2.setFont(new Font("Serif", Font.PLAIN, 30));
+        g2.setFont(FontLoader.customFont
+                    .deriveFont(30f)
+                    .deriveFont(Font.PLAIN));
+        fm = g2.getFontMetrics();
         g2.setColor(Color.GRAY);
-        g2.drawString("Press ENTER to return",
-                getWidth() / 2 - 170,
+        text = "Press ENTER to return";
+        g2.drawString(text,
+                (getWidth() - fm.stringWidth(text)) / 2,
                 getHeight() / 2 + 80);
     }
 

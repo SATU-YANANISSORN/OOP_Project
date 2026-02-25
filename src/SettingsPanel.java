@@ -101,11 +101,15 @@ public class SettingsPanel extends JPanel {
         g2.fillRect(0, 0, getWidth(), getHeight());
 
         // Title
-        g2.setFont(new Font("Serif", Font.BOLD, 70));
+        g2.setFont(FontLoader.customFont
+                    .deriveFont(60f)
+                    .deriveFont(Font.BOLD));
         g2.setColor(new Color(180, 0, 0));
         drawCentered(g2, "SETTINGS", getHeight() / 4);
 
-        g2.setFont(new Font("Serif", Font.PLAIN, 36));
+        g2.setFont(FontLoader.customFont
+                    .deriveFont(32f)
+                    .deriveFont(Font.PLAIN));
 
         for (int i = 0; i < options.length; i++) {
 

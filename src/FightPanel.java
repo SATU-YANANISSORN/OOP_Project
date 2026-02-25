@@ -166,7 +166,14 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
 
             if (curW.length() == 0) {
                 sound.playSFX("/Sound/Hit.wav"); // เสียงผู้เล่นตีโดน
-                movingTexts.add(new MovingText(String.valueOf(player.dealDamage(enemy)), getWidth() / 2, getHeight() / 2,Color.RED));
+                String damageText;
+                if(enemy.getCurHp() == 1&&enemy instanceof Boss2&&combo.getValue() < stage){
+                    damageText = "combo < "+stage;
+                }
+                else{
+                    damageText = String.valueOf(player.dealDamage(enemy));
+                }
+                movingTexts.add(new MovingText(damageText, getWidth() / 2, getHeight() / 2,Color.RED));
                 combo.increase();
                 main.getScoreBoard().updateCombo(combo.getValue());
                 randomNewWord();
@@ -256,7 +263,9 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
         g2.setColor(Color.white);
         //curWord
         String word = curWord;
-        Font fontBig = new Font("Serif", Font.BOLD, 80);
+        Font fontBig = FontLoader.customFont
+                        .deriveFont(100f)
+                        .deriveFont(Font.PLAIN);
         g2.setFont(fontBig);
 
         FontMetrics fm = g2.getFontMetrics();
@@ -264,11 +273,12 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
         int textHeight = fm.getAscent();
 
         int x = (w - textWidth) / 2;
-        int y = (h + textHeight) / 2 - 225;
+        int y = (h + textHeight) / 2 - 275;
 
         g2.drawString(word, x, y);
 
-        Font fontSmall = new Font("Serif", Font.BOLD, 40);
+        Font fontSmall = FontLoader.customFont
+                            .deriveFont(40f);
 
         // ===== Combo & Stage =====
         g2.setFont(fontSmall);
@@ -289,7 +299,9 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
 
 
         // ===== High Score =====
-        Font highFont = new Font("Serif", Font.PLAIN, 22);
+        Font highFont = FontLoader.customFont
+                        .deriveFont(30f)
+                        .deriveFont(Font.PLAIN);
         g2.setFont(highFont);
         FontMetrics fmHigh = g2.getFontMetrics();
 
@@ -309,7 +321,8 @@ public class FightPanel extends JPanel implements Updateable, Onenterable {
         g2.drawString(highCombo, highX2, highY2);
         
         // ===== Control Description =====
-        Font descFont = new Font("Serif", Font.PLAIN, 16);
+        Font descFont = FontLoader.customFont
+                        .deriveFont(28f);
         g2.setFont(descFont);
         g2.setColor(Color.WHITE);
 

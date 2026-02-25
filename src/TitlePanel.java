@@ -7,7 +7,7 @@ import javax.swing.*;
 
 
 public class TitlePanel extends JPanel {
-    public JButton btnStart, btnSetting, btnExit, btnHW;
+    public JButton btnStart, btnSetting, btnExit;
     private BufferedImage BGimg,Logo;
 
     private MainPanel main;
@@ -26,7 +26,6 @@ public class TitlePanel extends JPanel {
 
         btnStart = createCustomButton("START GAME");
         btnSetting = createCustomButton("SETTINGS");
-        btnHW = createCustomButton("HOW TO PLAY");
         btnExit = createCustomButton("EXIT");
 
         btnStart.addActionListener(e -> main.showScene("GAME"));
@@ -36,7 +35,6 @@ public class TitlePanel extends JPanel {
 
         this.add(btnStart);
         this.add(btnSetting);
-        this.add(btnHW);
         this.add(btnExit);
 
         // เปลี่ยนขนาดจอ
@@ -55,7 +53,7 @@ public class TitlePanel extends JPanel {
 
         // --- คำนวณขนาดตาม % ของจอ ---
         int btnW = (int)(w * 0.30);  // กว้าง 25% ของจอ
-        int btnH = (int)(h * 0.06);  // สูง 8% ของจอ
+        int btnH = (int)(h * 0.1);  // สูง 8% ของจอ
         int xPos = (w - btnW) / 2;    // กึ่งกลางแนวนอน
         int startY = (int)(h * 0.62); // เริ่มปุ่มแรกที่ 55% ของความสูงจอ
         int spacing = (int)(h * 0.08); // เว้นระยะห่างปุ่มละ 11%
@@ -63,16 +61,30 @@ public class TitlePanel extends JPanel {
         // อัปเดตตำแหน่งและขนาดปุ่ม
         btnStart.setBounds(xPos, startY, btnW, btnH);
         btnSetting.setBounds(xPos, startY + spacing, btnW, btnH);
-        btnHW.setBounds(xPos, startY + (spacing * 2), btnW, btnH);
-        btnExit.setBounds(xPos, startY + (spacing * 3), btnW, btnH);
+        btnExit.setBounds(xPos, startY + (spacing * 2), btnW, btnH);
 
         // อัปเดตขนาดตัวอักษรในปุ่ม
-        int btnFontSize = Math.max(15, (int)(btnH * 0.2));
-        Font btnFont = new Font("SansSerif", Font.BOLD, btnFontSize);
+        Font btnFont = FontLoader.customFont.deriveFont(80f);
+
         btnStart.setFont(btnFont);
         btnSetting.setFont(btnFont);
-        btnHW.setFont(btnFont);
         btnExit.setFont(btnFont);
+
+        btnStart.setContentAreaFilled(false);
+        btnStart.setBorderPainted(false);
+        btnStart.setFocusPainted(false);
+        btnStart.setOpaque(false);
+
+        btnSetting.setContentAreaFilled(false);
+        btnSetting.setBorderPainted(false);
+        btnSetting.setFocusPainted(false);
+        btnSetting.setOpaque(false);
+
+        btnExit.setContentAreaFilled(false);
+        btnExit.setBorderPainted(false);
+        btnExit.setFocusPainted(false);
+        btnExit.setOpaque(false);
+
         
         repaint(); // สั่งให้วาดชื่อเกมใหม่ด้วย
     }
@@ -114,7 +126,8 @@ public class TitlePanel extends JPanel {
 
         // ===== High Score =====
         g2.setColor(Color.WHITE);
-        g2.setFont(new Font("Serif", Font.BOLD, 28));
+        // g2.setFont(new Font("Myfont", Font.BOLD, 28));
+        g2.setFont(FontLoader.customFont.deriveFont(36f));
 
         int highStage = main.getScoreBoard().getMaxStage();
         int highCombo = main.getScoreBoard().getMaxCombo();

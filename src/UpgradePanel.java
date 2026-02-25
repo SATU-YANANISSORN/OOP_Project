@@ -39,6 +39,7 @@ public class UpgradePanel extends JPanel implements panelCreate, Onenterable {
         this.baseAtkUpgradePanel = new UpgradeStatPanel("Damage",2,upgrade,showKarma,"img/upgradePanel2.png");
 
         JLabel label = createLabel("UPGRADES", 54);
+        label.setFont(FontLoader.customFont);
         JPanel statGroup = new JPanel(new FlowLayout());
         statGroup.setBackground(Color.BLACK);
 
