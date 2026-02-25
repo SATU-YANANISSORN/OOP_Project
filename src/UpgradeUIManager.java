@@ -53,4 +53,11 @@ public class UpgradeUIManager {
             }
         });
     }
+
+    public static void setButtonColor(JButton button, Color bgColor, Color textColor) {
+        button.setBackground(bgColor);
+        button.setForeground(textColor);
+        button.setContentAreaFilled(true); 
+        button.setOpaque(true);
+    }
 }
