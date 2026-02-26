@@ -13,8 +13,8 @@ public class SettingsPanel extends JPanel {
     };
 
     private int selected = 0;
-    private int musicVolume = 50;
-    private int sfxVolume = 50;
+    private int musicVolume = 40;
+    private int sfxVolume = 40;
 
     public SettingsPanel(MainPanel main) {
         this.main = main;

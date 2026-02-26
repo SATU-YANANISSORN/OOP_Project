@@ -52,7 +52,13 @@ public class StageManager{
     public Enemy selectEnemy(int stage){
         Random random = new Random();
         Enemy ori;
-        if(stage % 5 == 0){
+        if(stage == 5){
+            ori = bossList.get(0);
+        }
+        else if (stage == 10){
+            ori = bossList.get(1);
+        }
+        else if(stage % 5 == 0){
             ori = bossList.get(random.nextInt(bossList.size()));
         }
         else{
